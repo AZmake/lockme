@@ -18,7 +18,6 @@ class Model extends BaseModel {
     return this.addToast(data).then(res => {
       let _id = res._id
       data = { ...data, _id }
-      console.log('111', data, '111')
       return [data, ...this.items].map(i => {
         i.show = true
         return i
