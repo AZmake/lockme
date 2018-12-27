@@ -1,3 +1,6 @@
+
+import { Passwords } from '../../models/Passwords'
+
 const app = getApp()
 const db = wx.cloud.database()
 
@@ -12,130 +15,61 @@ Page({
   },
 
   setName(e) {
-    this.setData({
-      name: e.detail.value
-    })
-
-    this.resetPasswordsShow()
-  },
-
-  resetPasswordsShow() {
-    const name = this.data.name
+    const name = e.detail.value
     let passwords = this.data.passwords
-
     this.setData({
+      name,
       passwords: passwords.map(i => {
         i.show = i.name.indexOf(name) !== -1
         return i
       })
     })
-  },
+  },    
 
   addPassword(e) {
-    if (this.data.name === '') {
-      wx.showToast({
-        title: '账号名不能为空',
-        icon: 'none',
-        duration: 2000
-      })
-    } else {
-      let data = {
-        name: this.data.name,
-        password: '123456',
-        public_key: app.globalData.publicKey,
-        created_at: new Date(),
-        updated_at: new Date(),
-      };
+    let passwords = this.data.passwords
+    let data = {
+      name: this.data.name,
+      password: '123456',
+      public_key: app.globalData.publicKey,
+    }
 
-      db.collection('passwords')
-        .add({ data })
-        .then(res => {
-          data = {
-            ...data,
-            _id: res._id,
-            show: true,
-            _openid: app.globalData.openid,
-          }
-
-          let passwords = [data, ...this.data.passwords]
-
-          this.setData({
-            name: '',
-            passwords: passwords
-          })
-
-          this.resetPasswordsShow()
-
-          wx.showToast({
-            title: '创建成功',
-            duration: 2000
-          })
-        })
-        .catch(error => {
-          wx.showToast({
-            title: '创建失败',
-            icon: 'none',
-            duration: 2000
-          })
-        })
+    if(Passwords.setItem(passwords).valid(data)) {
+      Passwords.setItem(passwords).add(data)
+        .then(passwords => this.setData( { passwords, name: '' }))
     }
   },
 
   getPasswords() {
-    wx.showLoading({ title: '加载中' })
-
-    db.collection('passwords')
-      .orderBy('created_at', 'desc')  
-      .get({
-        success: (res) => {
-          this.setData({
-            passwords: res.data.map(i => {
-              i.show = true
-              return i
-            })
-          })
-          wx.hideLoading()
-        }
-      })
-  },
-
-  copyPassword(e) {
-    const _id = e.currentTarget.dataset.index
-    const item = this.data.passwords.filter(i => i._id == _id)[0]
-    wx.setClipboardData({
-      data: item.password,
-      success(res) {
-        wx.showToast({
-          title: '密码已复制',
-          duration: 2000
-        })
-      }
-    })
+    Passwords.get()
+      .then(passwords => this.setData({ passwords }))
   },
 
   delPassword(e) {
-    const _id = e.currentTarget.dataset.index
+    const id = e.currentTarget.dataset.index
+    const passwords = this.data.passwords
 
-    db.collection('passwords')
-      .doc(_id)
-      .remove()
-      .then(() => {
-        this.setData({
-          passwords: this.data.passwords.filter(i => i._id != _id)
-        })
+    wx.showModal({
+      title: '提示',
+      content: '确认删除',
+      success: res => res.cancel ||
+        Passwords.setItem(passwords).remove(id)
+          .then(passwords => this.setData({ passwords }))
+    })
+  },
 
-        wx.showToast({
-          title: '删除成功',
-          duration: 2000
-        })
+  copyPassword(e) {
+    const id = e.currentTarget.dataset.index
+    const passwords = this.data.passwords
+    const item = Passwords.setItem(passwords).find(id)
+
+    wx.setClipboardData({
+      data: item.password,
+      success: () => wx.showToast({
+        title: '密码已复制',
+        duration: 2000
       })
-      .catch(error => {
-        wx.showToast({
-          title: '删除失败',
-          icon: 'none',
-          duration: 2000
-        })
-        console.error(error)
-      })
+    })
   }
+
 })
