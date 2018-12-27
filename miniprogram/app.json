@@ -1,0 +1,32 @@
+{
+  "pages": [
+    "pages/index/index"
+  ],
+  "window": {
+    "backgroundColor": "#353435",
+    "backgroundTextStyle": "light",
+    "navigationBarBackgroundColor": "#353435",
+    "navigationBarTitleText": "LockMe",
+    "navigationBarTextStyle": "white"
+  },
+  "tabBar": {
+    "backgroundColor": "#353435",
+    "borderStyle": "white",
+    "color": "#4D4C4D",
+    "selectedColor": "#fff",
+    "list": [
+      {
+        "pagePath": "pages/index/index",
+        "text": "密码中心",
+        "iconPath": "images/lock.png",
+        "selectedIconPath": "images/lock_fill.png"
+      },
+      {
+        "pagePath": "pages/index/index",
+        "text": "设置",
+        "iconPath": "images/setup.png",
+        "selectedIconPath": "images/setup_fill.png"
+      }
+    ]
+  }
+}
