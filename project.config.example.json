@@ -1,0 +1,23 @@
+{
+  "miniprogramRoot": "miniprogram/",
+  "cloudfunctionRoot": "cloudfunctions/",
+  "setting": {
+    "urlCheck": true,
+    "es6": true,
+    "postcss": true,
+    "minified": true,
+    "newFeature": true,
+    "nodeModules": true,
+    "autoAudits": false,
+    "uglifyFileName": true
+  },
+  "appid": "https://github.com/pushmetop",
+  "projectname": "lockme",
+  "libVersion": "2.4.3",
+  "cloudfunction": {
+    "env": "",
+    "collection": {
+      "passwords": "passwords"
+    }
+  }
+}
