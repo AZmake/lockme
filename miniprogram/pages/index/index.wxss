@@ -1,0 +1,53 @@
+/**表单部分**/
+.index-input {}
+
+.input-wrap {
+  flex-grow: 1;
+}
+
+.input-button {
+  flex-grow: 0;
+}
+
+.index-input .input {
+  height: 52rpx;
+
+  padding: 20rpx;
+  border-radius: 10rpx;
+
+  line-height: 32rpx;
+}
+
+.index-input button {
+  width: 125rpx;
+  line-height: 52rpx;
+
+  padding: 20rpx;
+  font-size: 32rpx;
+
+  color: #fff;
+  background: #B4373A;
+}
+
+.index-list {
+  height: 120rpx;
+
+  border-radius: 10rpx;
+}
+
+.list-name {
+  flex-grow: 1;
+  margin-left: 20rpx;
+}
+
+.list-option {
+  margin-right: 20rpx;
+  width: 250rpx;
+  flex-grow: 0;
+  text-align: right;
+}
+
+.iconfont {
+  font-size: 50rpx;
+  margin-left: 20rpx;
+}

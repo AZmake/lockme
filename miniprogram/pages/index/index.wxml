@@ -1,0 +1,49 @@
+<!--index.wxml-->
+<view class="container">
+  
+  <!--输入框-->
+  <view class="index-input flex main-start">
+
+    <view class="input-wrap">
+      <input class="input bg-grey"
+        placeholder="搜索账号或快速创建"
+        value="{{name}}"
+        bindinput="setName"
+        bindconfirm="getPasswords"
+        confirm-type="search"
+        auto-focus />
+    </view>
+
+    <view class="input-button margin-left">
+      <button class="button"
+        bindtap="addPassword">
+        创建
+      </button>
+    </view>
+  </view>
+
+  <!--内容列表-->
+  <view class="index-list bg-grey flex main-start margin-top"
+    wx:for="{{passwords}}"
+    wx:key="{{item._id}}"
+    hidden="{{!item.show}}">
+      <view class="list-name flex cross-center">
+        <text>{{item.name}}</text>
+      </view>
+      <view class="list-option flex cross-center main-center">
+          <text class="iconfont icon-copy"
+            data-index="{{item._id}}"
+            bindtap="copyPassword"></text>
+          <!-- <text class="iconfont icon-edit"></text> -->
+          <text class="iconfont icon-delete"
+            data-index="{{item._id}}"
+            bindtap="delPassword"></text>
+      </view>
+  </view>
+
+  <view wx:if="{{passwords.length === 0}}" class="index-list bg-grey flex main-start margin-top">
+      <view class="list-name flex cross-center">
+        <text>╮(╯_╰)╭ 暂无数据，请进行创建</text>
+      </view>
+  </view>
+</view>
