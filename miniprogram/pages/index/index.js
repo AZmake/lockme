@@ -1,5 +1,4 @@
-
-import { Passwords } from '../../models/Passwords'
+import { Passwords } from '../../collections/PasswordsCollecion'
 
 const app = getApp()
 const db = wx.cloud.database()
