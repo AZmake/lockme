@@ -1,12 +1,12 @@
-import BaseModel from './Model'
+import Collection from './Collection'
 
-class Model extends BaseModel {
+class PasswordsCollecion extends Collection {
   constructor() {
     super('passwords')
   }
 
   get() {
-    return this.getToast().then(res => {
+    return super.getToast().then(res => {
       return res.data.map(i => {
         i.show = true
         return i
@@ -61,5 +61,5 @@ class Model extends BaseModel {
   }
 }
 
-export const Passwords = new Model;
-export default Model
+export const Passwords = new PasswordsCollecion;
+export default PasswordsCollecion
