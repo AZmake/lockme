@@ -1,5 +1,5 @@
 <!--index.wxml-->
-<view class="container">
+<view class="container theme-{{themeName}}">
   
   <!--输入框-->
   <view class="index-input flex main-start">
@@ -9,9 +9,7 @@
         placeholder="搜索账号或快速创建"
         value="{{name}}"
         bindinput="setName"
-        bindconfirm="getPasswords"
-        confirm-type="search"
-        auto-focus />
+        confirm-type="search" />
     </view>
 
     <view class="input-button margin-left">
@@ -23,7 +21,7 @@
   </view>
 
   <!--内容列表-->
-  <view class="index-list bg-grey flex main-start margin-top"
+  <view class="index-list flex main-start margin-top"
     wx:for="{{passwords}}"
     wx:key="{{item._id}}"
     hidden="{{!item.show}}">
@@ -41,7 +39,7 @@
       </view>
   </view>
 
-  <view wx:if="{{passwords.length === 0}}" class="index-list bg-grey flex main-start margin-top">
+  <view wx:if="{{passwords.length === 0}}" class="index-list flex main-start margin-top">
       <view class="list-name flex cross-center">
         <text>╮(╯_╰)╭ 暂无数据，请进行创建</text>
       </view>

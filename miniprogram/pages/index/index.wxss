@@ -1,4 +1,4 @@
-/**表单部分**/
+/**搜索框部分**/
 .index-input {}
 
 .input-wrap {
@@ -10,14 +10,27 @@
 }
 
 .index-input .input {
-  height: 52rpx;
+  height: 50rpx;
 
   padding: 20rpx;
   border-radius: 10rpx;
 
   line-height: 32rpx;
+  
 }
 
+.theme-black .index-input .input {
+  background: #4D4C4D;
+  border: 1px #4D4C4D solid;
+}
+
+.theme-white .index-input .input {
+  background: #fff;
+  border: 1px #fff solid;
+}
+/**搜索框部分**/
+
+/**搜索按钮部分**/
 .index-input button {
   width: 125rpx;
   line-height: 52rpx;
@@ -29,10 +42,24 @@
   background: #B4373A;
 }
 
+.theme-white .index-input button {
+  color: #fff;
+  background: #000;
+}
+/**搜索按钮部分**/
+
+/**列表部分**/
 .index-list {
   height: 120rpx;
-
   border-radius: 10rpx;
+}
+
+.theme-white .index-list {
+  background: #fff;
+}
+
+.theme-black .index-list {
+  background: #4D4C4D;
 }
 
 .list-name {
@@ -51,3 +78,4 @@
   font-size: 50rpx;
   margin-left: 20rpx;
 }
+/**列表部分**/

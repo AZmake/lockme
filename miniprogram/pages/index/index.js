@@ -1,16 +1,20 @@
 import { Passwords } from '../../collections/PasswordsCollecion'
 
 const app = getApp()
-const db = wx.cloud.database()
 
 Page({
   data: {
     name: '',
+    themeName: '',
     passwords: [],
   },
 
   onLoad() {
-    this.getPasswords();
+    this.getPasswords()
+  },
+
+  onShow() {
+    this.setData({ themeName: app.globalData.themeName })
   },
 
   setName(e) {
@@ -23,7 +27,7 @@ Page({
         return i
       })
     })
-  },    
+  },
 
   addPassword(e) {
     let passwords = this.data.passwords
