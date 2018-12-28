@@ -1,7 +1,6 @@
 /**整体样式**/
 page {
-  background: #353435;
-  color: #fff;
+  height: 100%;
 }
 
 .container {
@@ -9,8 +8,10 @@ page {
   flex-direction: column;
   align-items: center;
   box-sizing: border-box;
-  margin: 20rpx 50rpx 0;
+  padding: 20rpx 50rpx 0;
   font-size: 32rpx;
+  height: 100%;
+  width: 100%;
 }
 
 @font-face {
@@ -45,7 +46,6 @@ page {
 .flex {
   display: flex;
   width: 100%;
-  height: 100%;
 }
 
 .main-start {
@@ -77,13 +77,15 @@ page {
   margin-left: 20rpx;
 }
 
-/**背景色**/
-.bg-black {
+/**主题相关**/
+page .theme-black {
   background: #353435;
+  color: #fff;
 }
 
-.bg-grey {
-  background: #4D4C4D;
+page .theme-white {
+  background: #F8F8F8;
+  color: #000;
 }
 
 /**text**/

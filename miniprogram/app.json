@@ -1,19 +1,12 @@
 {
   "pages": [
-    "pages/index/index"
+    "pages/index/index",
+    "pages/setting/index"
   ],
   "window": {
-    "backgroundColor": "#353435",
-    "backgroundTextStyle": "light",
-    "navigationBarBackgroundColor": "#353435",
-    "navigationBarTitleText": "LockMe",
-    "navigationBarTextStyle": "white"
+    "navigationBarTitleText": "LockMe"
   },
   "tabBar": {
-    "backgroundColor": "#353435",
-    "borderStyle": "white",
-    "color": "#4D4C4D",
-    "selectedColor": "#fff",
     "list": [
       {
         "pagePath": "pages/index/index",
@@ -22,7 +15,7 @@
         "selectedIconPath": "images/lock_fill.png"
       },
       {
-        "pagePath": "pages/index/index",
+        "pagePath": "pages/setting/index",
         "text": "设置",
         "iconPath": "images/setup.png",
         "selectedIconPath": "images/setup_fill.png"
