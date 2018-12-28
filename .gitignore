@@ -15,3 +15,4 @@ node_modules/
 
 # Config
 project.config.json
+miniprogram/config.js
