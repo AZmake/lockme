@@ -1,7 +1,6 @@
 export default class {
   constructor(name) {
-    this.collections = getApp().globalData.collections
-    console.log(getApp())
+    this.collections = getApp().globalData.cloud.collections
     this.db = wx.cloud.database()
     this.collectionName = this.collections[name]
     this.items = []
