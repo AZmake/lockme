@@ -10,17 +10,17 @@
 
 ##### 初始化项目
 
-* 复制 `project.config.example.json` 为 `project.config.json`
-* 根据环境变量说明配置项目
-* 上传 `cloudfunctions/` 目录中的函数
-* 根据 `cloudfunction.collection` 创建云函数数据库
+* 创建 `project.config.json`
+* 复制 `miniprogram/config-example.js` 为 `miniprogram/config.js` 环境变量
+* 配置 `miniprogram/config.js` 环境变量
+* 上传 `cloudfunctions/` 云函数
+* 根据 `cloudfunction.collection` 创建云数据库
 
 ##### 环境变量说明
 
-* `appid` 小程序ID
-* `cloudfunction.env` 小程序云环境 ID
-* `cloudfunction.collection` 小程序云的对应数据库集合
-* `cloudfunction.collection.passwords` 密码集合
+* `cloud.env` 小程序云环境 ID
+* `cloud.collection` 小程序云的对应数据库集合
+* `cloud.collection.passwords` 密码集合
 * 其他配置请参考小程序官方文档 [传送门](https://developers.weixin.qq.com/miniprogram/dev/devtools/projectconfig.html)
 
 
