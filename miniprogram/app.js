@@ -1,4 +1,5 @@
-//app.js
+import config from 'config'
+
 App({
   onLaunch() {
     
@@ -10,17 +11,21 @@ App({
     this.globalData = {}
 
     wx.cloud.init({
+      env: config.cloud.env,
       traceUser: true,
     })
 
     // 设置 openid
     wx.cloud.callFunction({
       name: 'login',
-      complete: res => this.globalData.openid = res.result.openid
+      complete: res => this.globalData.openid = res.result.openid,
     })
 
     // TODO 设置 publickey
     this.globalData.publicKey = 'pushmetop'
     this.globalData.privateKey = 'pushmetop'
+
+    // 设置数据库
+    this.globalData.collections = config.cloud.collections
   },
 })
