@@ -9,6 +9,7 @@ class PasswordsCollecion extends Collection {
     return super.getToast().then(res => {
       return res.data.map(i => {
         i.show = true
+        i.showDesc = false
         return i
       })
     })
@@ -20,6 +21,7 @@ class PasswordsCollecion extends Collection {
       data = { ...data, _id }
       return [data, ...this.items].map(i => {
         i.show = true
+        i.showDesc = false
         return i
       })
     })
@@ -28,6 +30,17 @@ class PasswordsCollecion extends Collection {
   remove(id) {
     return this.removeToast(id)
       .then(() => this.items.filter(i => i._id != id))
+  }
+
+  toggleShowDesc(id) {
+    return new Promise((resolve) => {
+      resolve(this.items.map(i => {
+        if(i._id === id) {
+          i.showDesc = !i.showDesc
+        }
+        return i
+      }))
+    })
   }
 
   find(id) {
