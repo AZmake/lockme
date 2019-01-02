@@ -28,6 +28,8 @@ App({
       this.theme.items.forEach(i => wx.setTabBarItem(i))
       wx.setTabBarStyle(this.theme.tabBarStyle)
       wx.setNavigationBarColor(this.theme.navigationBar)
+      wx.setBackgroundColor(this.theme.backgroundColor)
+      wx.setBackgroundTextStyle(this.theme.backgroundTextStyle)
     }
 
     // TODO 设置 publickey
