@@ -2,7 +2,7 @@
 <view class="container theme-{{themeName}}">
   
   <!--输入框-->
-  <view class="index-input flex main-start">
+  <view class="index-input flex main-start margin-bottom">
 
     <view class="input-wrap">
       <input class="input bg-grey"
@@ -20,28 +20,46 @@
     </view>
   </view>
 
-  <!--内容列表-->
-  <view class="index-list flex main-start margin-top"
+  <view class="index-list flex margin-bottom"
     wx:for="{{passwords}}"
     wx:key="{{item._id}}"
-    hidden="{{!item.show}}">
-      <view class="list-name flex cross-center">
+    hidden="{{!item.show}}"
+    data-index="{{item._id}}"
+    catchtap="toggleShowPasswordDesc">
+    <view class="index-header flex">
+      <view class="list-header-name flex cross-center">
         <text>{{item.name}}</text>
       </view>
-      <view class="list-option flex cross-center main-center">
-          <text class="iconfont icon-copy"
-            data-index="{{item._id}}"
-            bindtap="copyPassword"></text>
-          <!-- <text class="iconfont icon-edit"></text> -->
-          <text class="iconfont icon-delete"
-            data-index="{{item._id}}"
-            bindtap="delPassword"></text>
+      <view class="list-header-option flex cross-center main-center">
+        <text class="iconfont icon-copy"
+          data-index="{{item._id}}"
+          catchtap="copyPassword"></text>
+        <text class="iconfont icon-delete"
+          data-index="{{item._id}}"
+          catchtap="delPassword"></text>
       </view>
+    </view>
+    <view class="index-content flex" hidden="{{!item.showDesc}}">
+      <view class="list-content flex cross-center">
+        <text class="list-content-name margin-left">账号</text>
+        <text class="list-content-desc margin-right">{{item.account}}</text>
+      </view>
+      <view class="list-content flex cross-center">
+        <text class="list-content-name margin-left">密码</text>
+        <text class="list-content-desc margin-right">{{item.password}}</text>
+      </view>
+      <view class="list-content flex cross-center">
+        <text class="list-content-name margin-left">备注</text>
+        <text class="list-content-desc margin-right">{{item.note}}</text>
+      </view>
+    </view>
   </view>
 
-  <view wx:if="{{passwords.length === 0}}" class="index-list flex main-start margin-top">
-      <view class="list-name flex cross-center">
+  <view class="index-list flex margin-bottom">
+    <view wx:if="{{passwords.length === 0}}" class="index-header flex main-start">
+      <view class="list-header-name flex cross-center">
         <text>╮(╯_╰)╭ 暂无数据，请进行创建</text>
       </view>
+    </view>
   </view>
 </view>

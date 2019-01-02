@@ -50,8 +50,12 @@
 
 /**列表部分**/
 .index-list {
-  height: 120rpx;
+  flex-wrap: wrap;
   border-radius: 10rpx;
+}
+
+.index-header {
+  height: 120rpx;
 }
 
 .theme-white .index-list {
@@ -62,12 +66,16 @@
   background: #4D4C4D;
 }
 
-.list-name {
+.index-content {
+  flex-wrap: wrap;
+}
+
+.list-header-name {
   flex-grow: 1;
   margin-left: 20rpx;
 }
 
-.list-option {
+.list-header-option {
   margin-right: 20rpx;
   width: 250rpx;
   flex-grow: 0;
@@ -77,5 +85,27 @@
 .iconfont {
   font-size: 50rpx;
   margin-left: 20rpx;
+}
+
+
+.list-content {
+  height: 80rpx;
+  
+}
+
+.theme-black .list-content {
+  border-top: 1px #353435 solid;
+}
+
+.theme-white .list-content {
+  border-top: 1px #F8F8F8 solid;
+}
+
+.list-content-name {
+  flex-grow: 1;
+}
+
+.list-content-desc {
+  flex-grow: 0;
 }
 /**列表部分**/

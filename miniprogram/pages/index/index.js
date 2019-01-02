@@ -29,11 +29,20 @@ Page({
     })
   },
 
+  toggleShowPasswordDesc(e) {
+    const id = e.currentTarget.dataset.index
+    const passwords = this.data.passwords
+    Passwords.setItem(passwords).toggleShowDesc(id)
+      .then(passwords => this.setData( { passwords }))
+  },
+
   addPassword(e) {
     let passwords = this.data.passwords
     let data = {
       name: this.data.name,
+      account: '15311111111',
       password: '123456',
+      note: '微信密码',
       public_key: app.globalData.publicKey,
     }
 
