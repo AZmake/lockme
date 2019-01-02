@@ -1,6 +1,4 @@
-<!--index.wxml-->
 <view class="container theme-{{themeName}}">
-  
   <!--输入框-->
   <view class="index-input flex main-start margin-bottom">
 
@@ -20,6 +18,7 @@
     </view>
   </view>
 
+  <!-- 密码列表 -->
   <view class="index-list flex margin-bottom"
     wx:for="{{passwords}}"
     wx:key="{{item._id}}"
@@ -55,6 +54,8 @@
     </view>
   </view>
 
+
+  <!-- 无密码列表提示 -->
   <view class="index-list flex margin-bottom">
     <view wx:if="{{passwords.length === 0}}" class="index-header flex main-start">
       <view class="list-header-name flex cross-center">
@@ -62,4 +63,5 @@
       </view>
     </view>
   </view>
+
 </view>
