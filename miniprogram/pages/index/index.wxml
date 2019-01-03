@@ -117,7 +117,7 @@
         </view>
       </view>
       <view class="index-content flex" hidden="{{!item.showDesc}}">
-        <view class="list-content flex cross-center">
+        <view wx:if="{{item.account !== ''}}" class="list-content flex cross-center">
           <text class="list-content-name margin-left">账号</text>
           <text class="list-content-desc margin-right">{{item.account}}</text>
         </view>
@@ -125,7 +125,7 @@
           <text class="list-content-name margin-left">密码</text>
           <text class="list-content-desc margin-right">{{item.password}}</text>
         </view>
-        <view class="list-content flex cross-center">
+        <view wx:if="{{item.note !== ''}}" class="list-content flex cross-center">
           <text class="list-content-name margin-left">备注</text>
           <text class="list-content-desc margin-right">{{item.note}}</text>
         </view>

@@ -118,7 +118,15 @@
 .list-content .button {
   width: 50%;
   text-align: center;
+}
+
+
+.theme-black .list-content .button {
   border-right: 1px #353435 solid;
+}
+
+.theme-white .list-content .button {
+  border-right: 1px #F8F8F8 solid;
 }
 
 .list-content .button:last-child {
