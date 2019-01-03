@@ -30,6 +30,7 @@ export default class {
         wx.showToast({
           title: '加载失败',
           icon: 'none',
+          mask: true,
           duration: 2000
         })
         return error
@@ -47,7 +48,8 @@ export default class {
       .then(res => {
         wx.showToast({
           title: '创建成功',
-          duration: 2000
+          mask: true,
+          duration: 2000,
         })
         return res
       })
@@ -55,6 +57,7 @@ export default class {
         wx.showToast({
           title: '创建失败',
           icon: 'none',
+          mask: true,
           duration: 2000
         })
         return error
@@ -68,6 +71,7 @@ export default class {
       .then(res => {
         wx.showToast({
           title: '删除成功',
+          mask: true,
           duration: 2000
         })
         return res
@@ -75,6 +79,7 @@ export default class {
         wx.showToast({
           title: '删除失败',
           icon: 'none',
+          mask: true,
           duration: 2000
         })
         return error
