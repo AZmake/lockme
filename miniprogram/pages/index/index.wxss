@@ -10,13 +10,12 @@
 }
 
 .index-input .input {
-  height: 50rpx;
+  height: 52rpx;
 
   padding: 20rpx;
   border-radius: 10rpx;
 
   line-height: 32rpx;
-  
 }
 
 .theme-black .index-input .input {
@@ -55,7 +54,7 @@
 }
 
 .index-header {
-  height: 120rpx;
+  height: 100rpx;
 }
 
 .theme-white .index-list {
@@ -87,10 +86,8 @@
   margin-left: 20rpx;
 }
 
-
 .list-content {
   height: 80rpx;
-  
 }
 
 .theme-black .list-content {
@@ -101,11 +98,41 @@
   border-top: 1px #F8F8F8 solid;
 }
 
+.checkbox view {
+  margin-left: 20rpx;
+  width: 125rpx;
+  text-align: left;
+  display: inline-block;
+}
+
+.checkbox {
+  width: 50%;
+}
+
+.list-content checkbox .wx-checkbox-input {
+  margin: 0;
+  width: 32rpx; 
+  height: 32rpx;
+}
+
+.list-content .button {
+  width: 50%;
+  text-align: center;
+  border-right: 1px #353435 solid;
+}
+
+.list-content .button:last-child {
+  border: none;
+}
+
 .list-content-name {
+  width: 25%;
   flex-grow: 1;
 }
 
 .list-content-desc {
+  width: 75%;
+  text-align: right;
   flex-grow: 0;
 }
 /**列表部分**/

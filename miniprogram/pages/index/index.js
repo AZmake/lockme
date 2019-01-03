@@ -7,6 +7,21 @@ Page({
     name: '',
     themeName: '',
     passwords: [],
+    password: {
+      name: '',
+      account: '',
+      password: '',
+      note: '',
+      length: 10,
+      include: ['lowercase', 'uppercase', 'number', 'special'],
+    },
+    checkedItems: [
+      { value: 'lowercase', name: '小写字母', checked: false },
+      { value: 'uppercase', name: '大写字母', checked: false },
+      { value: 'number', name: '数字', checked: false },
+      { value: 'special', name: '特殊符号', checked: false },
+    ],
+    isShowPasswordForm: false,
   },
 
   onLoad() {
@@ -36,19 +51,116 @@ Page({
       .then(passwords => this.setData( { passwords }))
   },
 
+  setPasswordName(e) {
+    const name = e.detail.value
+    const password = this.data.password
+    this.setData({password: { ...password, name }})
+  },
+
+  setPasswordAccount(e) {
+    const account = e.detail.value
+    const password = this.data.password
+    this.setData({password: { ...password, account }})
+  },
+
+  setPasswordNote(e) {
+    const note = e.detail.value
+    const password = this.data.password
+    this.setData({password: { ...password, note }})
+  },
+
+  setPasswordInclude(e) {
+    const include = e.detail.value
+    const password = this.data.password
+    this.setData({password: { ...password, include }})
+    this.setPasswordRandomValue()
+  },
+
+  setPasswordLength(e) {
+    const length = parseInt(e.detail.value)
+    const password = this.data.password
+    
+    
+    wx.showToast({
+      title: `密码长度为${length}`,
+      icon: 'none',
+      mask: true,
+      duration: 2000
+    })
+
+    this.setData({
+      password: {
+        ...password,
+        length
+      }
+    })
+
+    this.setPasswordRandomValue()
+  },
+
+  setPasswordRandomValue() {
+    const password = this.data.password
+    const { include, length } = password
+    const value = Passwords.getRandomPassword(include, length)
+
+    if (value !== '') {
+      this.setData({
+        password: {
+          ...password,
+          length,
+          password: value
+        }
+      })
+    }
+  },
+
+  setPasswordValue(e) {
+    const value = e.detail.value
+    const password = this.data.password
+    this.setData({password: { ...password, password: value }})
+  },
+
+  showPasswordForm() {
+    const name = this.data.name
+    const password = this.data.password
+    const checkedItems = this.data.checkedItems
+
+    this.setData({
+      name: '',
+      isShowPasswordForm: true,
+      password: { ...password, name },
+      checkedItems: checkedItems.map(i => ({
+        ...i,
+        checked: password.include.includes(i.value),
+      }))
+    })
+
+    this.setPasswordRandomValue()
+  },
+
+  hiddenPasswordForm() {
+    this.setData({
+      isShowPasswordForm: false,
+      name: '',
+      password: {
+        name: '',
+        account: '',
+        password: '',
+        note: '',
+        length: 10,
+        include: ['lowercase', 'uppercase', 'number', 'special'],
+      }
+    })
+  },
+
   addPassword(e) {
     let passwords = this.data.passwords
-    let data = {
-      name: this.data.name,
-      account: '15311111111',
-      password: '123456',
-      note: '微信密码',
-      public_key: app.globalData.publicKey,
-    }
+    let data = this.data.password
 
     if(Passwords.setItem(passwords).valid(data)) {
       Passwords.setItem(passwords).add(data)
         .then(passwords => this.setData( { passwords, name: '' }))
+        .then(() => this.hiddenPasswordForm())
     }
   },
 
@@ -79,6 +191,7 @@ Page({
       data: item.password,
       success: () => wx.showToast({
         title: '密码已复制',
+        mask: true,
         duration: 2000
       })
     })

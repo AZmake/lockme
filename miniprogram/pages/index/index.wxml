@@ -10,58 +10,135 @@
         confirm-type="search" />
     </view>
 
-    <view class="input-button margin-left">
-      <button class="button"
-        bindtap="addPassword">
-        创建
-      </button>
-    </view>
+    <button class="input-button button margin-left"
+      bindtap="showPasswordForm">
+      创建
+    </button>
   </view>
 
-  <!-- 密码列表 -->
-  <view class="index-list flex margin-bottom"
-    wx:for="{{passwords}}"
-    wx:key="{{item._id}}"
-    hidden="{{!item.show}}"
-    data-index="{{item._id}}"
-    catchtap="toggleShowPasswordDesc">
-    <view class="index-header flex">
-      <view class="list-header-name flex cross-center">
-        <text>{{item.name}}</text>
+  <!-- 密码表单 -->
+  <block wx:if="{{isShowPasswordForm}}">
+    <view class="index-list flex margin-bottom">
+      <view class="index-header flex">
+        <view class="list-header-name flex cross-center">
+          <text>账号相关</text>
+        </view>
       </view>
-      <view class="list-header-option flex cross-center main-center">
-        <text class="iconfont icon-copy"
-          data-index="{{item._id}}"
-          catchtap="copyPassword"></text>
-        <text class="iconfont icon-delete"
-          data-index="{{item._id}}"
-          catchtap="delPassword"></text>
-      </view>
-    </view>
-    <view class="index-content flex" hidden="{{!item.showDesc}}">
-      <view class="list-content flex cross-center">
-        <text class="list-content-name margin-left">账号</text>
-        <text class="list-content-desc margin-right">{{item.account}}</text>
-      </view>
-      <view class="list-content flex cross-center">
-        <text class="list-content-name margin-left">密码</text>
-        <text class="list-content-desc margin-right">{{item.password}}</text>
-      </view>
-      <view class="list-content flex cross-center">
-        <text class="list-content-name margin-left">备注</text>
-        <text class="list-content-desc margin-right">{{item.note}}</text>
+      <view class="index-content flex">
+        <view class="list-content flex cross-center">
+          <text class="list-content-name margin-left">名称</text>
+          <input class="list-content-desc margin-right"
+            placeholder="输入账号名称"
+            bindinput="setPasswordName"
+            value="{{password.name}}" />
+        </view>
+        <view class="list-content flex cross-center">
+          <text class="list-content-name margin-left">账号</text>
+          <input class="list-content-desc margin-right"
+            placeholder="输入账号"
+            bindinput="setPasswordAccount"
+            value="{{password.account}}" />
+        </view>
+        <view class="list-content flex cross-center">
+          <text class="list-content-name margin-left">备注</text>
+          <input class="list-content-desc margin-right"
+            placeholder="输入备注"
+            bindinput="setPasswordNote"
+            value="{{password.note}}" />
+        </view>
       </view>
     </view>
-  </view>
-
-
-  <!-- 无密码列表提示 -->
-  <view class="index-list flex margin-bottom">
-    <view wx:if="{{passwords.length === 0}}" class="index-header flex main-start">
-      <view class="list-header-name flex cross-center">
-        <text>╮(╯_╰)╭ 暂无数据，请进行创建</text>
+    <view class="index-list flex margin-bottom">
+      <view class="index-header flex">
+        <view class="list-header-name flex cross-center">
+          <text>密码相关</text>
+        </view>
+      </view>
+      <view class="index-content flex">
+        <view class="list-content flex cross-center" style="height: 120rpx;">
+            <text class="list-content-name margin-left">包含字符</text>
+            <checkbox-group class="list-content-desc flex margin-right" style="flex-wrap: wrap;"
+              bindchange="setPasswordInclude">
+              <label class="checkbox"
+                wx:for="{{checkedItems}}"
+                wx:key="{{item.value}}">
+                <checkbox
+                  value="{{item.value}}"
+                  checked="{{item.checked}}" />
+                <view>{{item.name}}</view>
+              </label>
+            </checkbox-group>
+        </view>
+        <view class="list-content flex cross-center">
+          <text class="list-content-name margin-left">密码长度</text>
+          <slider class="list-content-desc margin-right"
+            min="4" max="15" block-size="12"
+            value="{{password.length}}"
+            bindchange="setPasswordLength" />
+        </view>
+        <view class="list-content flex cross-center">
+          <text class="list-content-name margin-left">密码</text>
+          <input class="list-content-desc margin-right"
+            placeholder="输入密码"
+            bindinput="setPasswordValue"
+            value="{{password.password}}" />
+        </view>
       </view>
     </view>
-  </view>
+    <view class="index-list flex margin-bottom">
+      <view class="index-content flex">
+        <view class="list-content flex cross-center">
+          <text catchtap="addPassword" class="button">保存</text>
+          <text catchtap="hiddenPasswordForm" class="button">取消</text>
+        </view>
+      </view>
+    </view>
+  </block>
 
+  <block wx:if="{{!isShowPasswordForm}}">
+    <!-- 密码列表 -->
+    <view class="index-list flex margin-bottom"
+      wx:for="{{passwords}}"
+      wx:key="{{item._id}}"
+      hidden="{{!item.show}}"
+      data-index="{{item._id}}"
+      catchtap="toggleShowPasswordDesc">
+      <view class="index-header flex">
+        <view class="list-header-name flex cross-center">
+          <text>{{item.name}}</text>
+        </view>
+        <view class="list-header-option flex cross-center main-center">
+          <text class="iconfont icon-copy"
+            data-index="{{item._id}}"
+            catchtap="copyPassword"></text>
+          <text class="iconfont icon-delete"
+            data-index="{{item._id}}"
+            catchtap="delPassword"></text>
+        </view>
+      </view>
+      <view class="index-content flex" hidden="{{!item.showDesc}}">
+        <view class="list-content flex cross-center">
+          <text class="list-content-name margin-left">账号</text>
+          <text class="list-content-desc margin-right">{{item.account}}</text>
+        </view>
+        <view class="list-content flex cross-center">
+          <text class="list-content-name margin-left">密码</text>
+          <text class="list-content-desc margin-right">{{item.password}}</text>
+        </view>
+        <view class="list-content flex cross-center">
+          <text class="list-content-name margin-left">备注</text>
+          <text class="list-content-desc margin-right">{{item.note}}</text>
+        </view>
+      </view>
+    </view>
+
+    <!-- 无密码列表提示 -->
+    <view class="index-list flex margin-bottom">
+      <view wx:if="{{passwords.length === 0}}" class="index-header flex main-start">
+        <view class="list-header-name flex cross-center">
+          <text>╮(╯_╰)╭ 暂无数据，请进行创建</text>
+        </view>
+      </view>
+    </view>
+  </block>
 </view>
