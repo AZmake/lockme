@@ -4,7 +4,8 @@
     "pages/setting/index"
   ],
   "window": {
-    "navigationBarTitleText": "LockMe"
+    "navigationBarTitleText": "LockMe",
+    "backgroundColor": "#000000"
   },
   "tabBar": {
     "list": [
