@@ -1,116 +1,76 @@
-export default class {
+import Base from '../utils/Base'
+
+export default class Collection extends Base {
   constructor(name) {
-    this.collections = getApp().globalData.cloud.collections
-    this.db = wx.cloud.database()
-    this.collectionName = this.collections[name]
+    super()
+
+    this.collectionName = this._cloud.collections[name]    
     this.items = []
   }
 
   collection() {
-    return this.db.collection(this.collectionName)
+    return this._db.collection(this.collectionName)
   }
 
-  setItem(items) {
+  setItems(items) {
     this.items = items
     return this
   }
 
+  getItems(items) {
+    return this.items
+  }
+
+  uniqueById() {
+    this.items = this.unique('_id')
+    return this.items
+  }
+
+  unique(key) {
+    let flags = new Set()
+    
+    this.items = this.items.filter(item => {
+      if (flags.has(item[key])) {
+          return false;
+      }
+      flags.add(item[key]);
+      return true;
+    })
+
+    return this.items
+  }
+
   getToast() {
-    wx.showLoading({ title: '加载数据' })
+    this._loading()
 
-    return this.collection()
-      .orderBy('created_at', 'desc')
-      .get()
-      .then(res => {
-        wx.hideLoading()
-        return res
-      })
-      .catch(error => {
-        wx.hideLoading()
-        wx.showToast({
-          title: '加载失败',
-          icon: 'none',
-          mask: true,
-          duration: 2000
-        })
-        return error
-      })
+    return this.collection().orderBy('created_at', 'desc').get()
+      .then(res => this._closeToast(res))
+      .catch(error => this._toast('加载失败', error))
   }
 
-  addToast(data) {
-    data = {
-      ...data,
-      created_at: this.db.serverDate(),
-      updated_at: this.db.serverDate(),
-    }
-    return this.collection()
-      .add({ data })
-      .then(res => {
-        wx.showToast({
-          title: '创建成功',
-          mask: true,
-          duration: 2000,
-        })
-        return res
-      })
-      .catch(error => {
-        wx.showToast({
-          title: '创建失败',
-          icon: 'none',
-          mask: true,
-          duration: 2000
-        })
-        return error
-      })
+  addToast(item) {
+    let data = item.toJson()
+    return this.collection().add({ data })
+      .then(res => this._toast('创建成功', res))
+      .catch(error => this._toast('创建失败', error))
   }
 
-  editToast(id, data) {
-    data = {
-      ...data,
-      updated_at: this.db.serverDate(),
-    }
-
-    return this.collection()
-      .doc(id)
-      .update({ data })
-      .then(res => {
-        wx.showToast({
-          title: '编辑成功',
-          mask: true,
-          duration: 2000,
-        })
-        return { ...res, _id: id }
-      })
-      .catch(error => {
-        wx.showToast({
-          title: '编辑失败',
-          icon: 'none',
-          mask: true,
-          duration: 2000,
-        })
-        return error
-      })
+  editToast(item) {
+    let data = item.toJson()
+    
+    return this.collection().doc(item._id).update({ data })
+      .then(res => this._toast('编辑成功', res))
+      .catch(error => this._toast('编辑失败', error))
   }
 
-  removeToast(id) {
-    return this.collection()
-      .doc(id)
-      .remove()
-      .then(res => {
-        wx.showToast({
-          title: '删除成功',
-          mask: true,
-          duration: 2000
-        })
-        return res
-      }).catch(error => {
-        wx.showToast({
-          title: '删除失败',
-          icon: 'none',
-          mask: true,
-          duration: 2000
-        })
-        return error
+  removeToast(item) {
+    let items = this.items.filter(i => i._id != item._id)
+    return this.collection().doc(item._id).remove()
+      .then(() => this._toast('删除成功'))
+      .then(() => this.items = items)
+      .catch(error => {
+        console.log(error)
+        this._toast('删除失败', error)
       })
   }
 }
