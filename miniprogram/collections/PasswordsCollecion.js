@@ -16,6 +16,29 @@ class PasswordsCollecion extends Collection {
     return origin[Math.floor(Math.random() * origin.length)]
   }
 
+  getPasswordInclude(password) {
+    let value = password.password
+    let include = []
+
+    if(value.match(/[0-9]/i)) {
+      include.push('number')
+    }
+
+    if(value.match(/[a-z]/i)) {
+      include.push('lowercase')
+    }
+
+    if(value.match(/[A-Z]/i)) {
+      include.push('uppercase')
+    }
+
+    if(value.match(/[-.~!@#$%^&*()_:<>,?]/i)) {
+      include.push('special')
+    }
+
+    return include
+  }
+
   getRandomPassword(range, length) {
     let origin = ''
     let target = ''
@@ -104,6 +127,26 @@ class PasswordsCollecion extends Collection {
     })
   }
 
+  edit(data) {
+    let id = data._id;
+    let password = {
+      name: data.name,
+      account: data.account,
+      note: data.note,
+      password: data.password,
+      created_at: data.created_at,
+    }
+    
+    return this.editToast(id, password).then(res => {
+      let items = this.items.filter(i => i._id != id)
+      return [password, ...items].map(i => {
+        i.show = true
+        i.showDesc = i._id == id
+        return i
+      })
+    })
+  }
+
   remove(id) {
     return this.removeToast(id)
       .then(() => this.items.filter(i => i._id != id))
@@ -136,7 +179,7 @@ class PasswordsCollecion extends Collection {
       return false
     }
 
-    let sameName = i => i.name === item.name
+    let sameName = i => i.name === item.name && i._id != item._id
 
     if (this.items.filter(sameName).length > 0) {
       wx.showToast({
