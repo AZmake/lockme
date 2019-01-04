@@ -1,5 +1,5 @@
-import config from 'config'
-
+import Config from './utils/Config'
+console.log(Config)
 App({
   onLaunch() {
     
@@ -10,7 +10,7 @@ App({
 
     // 初始化云函数
     wx.cloud.init({
-      env: config.cloud.env,
+      env: Config.cloud.env,
       traceUser: true,
     })
 
@@ -33,11 +33,11 @@ App({
     // TODO 设置 publickey
     this.globalData.publicKey = 'pushmetop'
     this.globalData.privateKey = 'pushmetop'
-    this.globalData.themeName = config.themeName
+    this.globalData.themeName = Config.themeName
   },
 
   initGlobalData() {
-    this.globalData = { ...config }
+    this.globalData = { ...Config }
 
     Object.defineProperty(this.globalData, 'themeName', {
       get: function () {

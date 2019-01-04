@@ -2,7 +2,7 @@ export default {
   cloud: {
     env: 'pushmetop',
     collections: {
-      passwords: 'passwords',
+      safes: 'safes',
     }
   },
   themeName: 'black',

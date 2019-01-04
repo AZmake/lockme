@@ -3,7 +3,7 @@ import Safe from '../models/Safe'
 
 export class SafeCollection extends Collection {
   constructor() {
-    super('passwords')
+    super('safes')
   }
 
   get() {
