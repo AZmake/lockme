@@ -64,6 +64,34 @@ export default class {
       })
   }
 
+  editToast(id, data) {
+    data = {
+      ...data,
+      updated_at: this.db.serverDate(),
+    }
+
+    return this.collection()
+      .doc(id)
+      .update({ data })
+      .then(res => {
+        wx.showToast({
+          title: '编辑成功',
+          mask: true,
+          duration: 2000,
+        })
+        return { ...res, _id: id }
+      })
+      .catch(error => {
+        wx.showToast({
+          title: '编辑失败',
+          icon: 'none',
+          mask: true,
+          duration: 2000,
+        })
+        return error
+      })
+  }
+
   removeToast(id) {
     return this.collection()
       .doc(id)
