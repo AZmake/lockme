@@ -1,219 +1,117 @@
-import { Passwords } from '../../collections/PasswordsCollecion'
+import Safes from '../../collections/Safes'
+import Safe from '../../models/Safe'
 
 const app = getApp()
 
 Page({
   data: {
-    name: '',
-    themeName: '',
-    passwords: [],
-    password: {
-      name: '',
-      account: '',
-      password: '',
-      note: '',
-      length: 10,
-      include: ['lowercase', 'uppercase', 'number', 'special'],
+    theme: '',
+    keyword: '',
+    safes: [],
+    safe: new Safe(),
+    form: {
+      show: false,
+      checks: [
+        { value: 'lowercase', name: '小写字母', checked: false },
+        { value: 'uppercase', name: '大写字母', checked: false },
+        { value: 'number', name: '数字', checked: false },
+        { value: 'special', name: '特殊符号', checked: false },
+      ],
     },
-    checkedItems: [
-      { value: 'lowercase', name: '小写字母', checked: false },
-      { value: 'uppercase', name: '大写字母', checked: false },
-      { value: 'number', name: '数字', checked: false },
-      { value: 'special', name: '特殊符号', checked: false },
-    ],
-    isShowPasswordForm: false,
-  },
-
-  onLoad() {
-    this.getPasswords()
   },
 
   onShow() {
-    this.setData({ themeName: app.globalData.themeName })
+    this.setData({ theme: app.globalData.themeName })
+    Safes.get().then(safes => this.setData({ safes }))
   },
 
-  setName(e) {
-    const name = e.detail.value
-    let passwords = this.data.passwords
-    this.setData({
-      name,
-      passwords: passwords.map(i => {
-        i.show = i.name.indexOf(name) !== -1
-        return i
-      })
-    })
+  setKeyword(e) {
+    const keyword = e.detail.value
+    this.setData({ keyword, })
+    Safes.search(keyword).then(safes => this.setData({ safes }))
   },
 
-  toggleShowPasswordDesc(e) {
-    const id = e.currentTarget.dataset.index
-    const passwords = this.data.passwords
-    Passwords.setItem(passwords).toggleShowDesc(id)
-      .then(passwords => this.setData( { passwords }))
-  },
-
-  setPasswordName(e) {
-    const name = e.detail.value
-    const password = this.data.password
-    this.setData({password: { ...password, name }})
-  },
-
-  setPasswordAccount(e) {
-    const account = e.detail.value
-    const password = this.data.password
-    this.setData({password: { ...password, account }})
-  },
-
-  setPasswordNote(e) {
-    const note = e.detail.value
-    const password = this.data.password
-    this.setData({password: { ...password, note }})
-  },
-
-  setPasswordInclude(e) {
-    const include = e.detail.value
-    const password = this.data.password
-    this.setData({password: { ...password, include }})
-    this.setPasswordRandomValue()
-  },
-
-  setPasswordLength(e) {
-    const length = parseInt(e.detail.value)
-    const password = this.data.password
+  setFormProp(e) {
+    let prop = e.currentTarget.dataset.prop
+    let safe = this.data.safe
+    safe[prop] = e.detail.value
     
-    
-    wx.showToast({
-      title: `密码长度为${length}`,
-      icon: 'none',
-      mask: true,
-      duration: 2000
-    })
-
-    this.setData({
-      password: {
-        ...password,
-        length
-      }
-    })
-
-    this.setPasswordRandomValue()
-  },
-
-  setPasswordRandomValue() {
-    const password = this.data.password
-    const { include, length } = password
-    const value = Passwords.getRandomPassword(include, length)
-
-    if (value !== '') {
-      this.setData({
-        password: {
-          ...password,
-          length,
-          password: value
-        }
-      })
+    if (['length'].includes(prop)) {
+      safe._toast(`密码长度为${e.detail.value}`)
     }
-  },
 
-  setPasswordValue(e) {
-    const value = e.detail.value
-    const password = this.data.password
-    this.setData({password: { ...password, password: value }})
-  },
-
-  showPasswordForm(e) {
-    const id = e.currentTarget.dataset.index
-    const passwords = this.data.passwords
-    let password = this.data.password
-    let checkedItems = this.data.checkedItems
-
-    if (id == 0) {
-      password = { ...password, name: this.data.name }
-    } else {
-      password = Passwords.setItem(passwords).find(id)
-      password.include = Passwords.getPasswordInclude(password)
-      password.length = password.password.length
+    if (['elements', 'length'].includes(prop)) {
+      safe.generate()
     }
-    
-    this.setData({
-      name: '',
-      password,
-      isShowPasswordForm: true,
-      checkedItems: checkedItems.map(i => ({
+
+    this.setData({ safe: safe })
+  },
+
+  showForm(e) {
+    const index = e.currentTarget.dataset.index
+    const safe = index === -1
+      ? new Safe({ name: this.data.keyword })
+      : this.data.safes[index]
+
+    const checks = this.data.form.checks.map(i => ({
         ...i,
-        checked: password.include.includes(i.value),
-      })), 
-    })
+        checked: safe.elements.includes(i.value),
+    }))
 
-    if (id == 0) {
-      this.setPasswordRandomValue()
-    }
-  },
-
-  hiddenPasswordForm() {
     this.setData({
-      isShowPasswordForm: false,
-      name: '',
-      password: {
-        name: '',
-        account: '',
-        password: '',
-        note: '',
-        length: 10,
-        include: ['lowercase', 'uppercase', 'number', 'special'],
-      }
+      safe,
+      keyword: '',
+      form: { show: true, checks: checks }
     })
   },
 
-  addOrEditPassword(e) {
-    let passwords = this.data.passwords
-    let data = this.data.password
-
-    if(!Passwords.setItem(passwords).valid(data)) {
-      return;
-    }
-
-    if (!data._id) {
-      Passwords.setItem(passwords).add(data)
-        .then(passwords => this.setData( { passwords, name: '' }))
-        .then(() => this.hiddenPasswordForm())
-    } else {
-      Passwords.setItem(passwords).edit(data)
-        .then(passwords => this.setData( { passwords, name: '' }))
-        .then(() => this.hiddenPasswordForm())
-    }
+  hiddenForm() {
+    const form = this.data.form
+    this.setData({
+      safe: new Safe(),
+      form: { ...form, show: false }
+    })
   },
 
-  getPasswords() {
-    Passwords.get()
-      .then(passwords => this.setData({ passwords }))
+  sumbitForm(e) {
+    const safe = this.data.safe
+    if(!Safes.valid(safe)) {
+      return 
+    }
+
+    let option = safe._id ? 'edit' : 'add'
+    
+    Safes[option](safe)
+      .then(safes => this.setData( { safes }))
+      .then(() => this.hiddenForm())
   },
 
-  delPassword(e) {
-    const id = e.currentTarget.dataset.index
-    const passwords = this.data.passwords
-
+  delSafe(e) {
+    const index = e.currentTarget.dataset.index
+    const safe = this.data.safes[index]
     wx.showModal({
       title: '提示',
       content: '确认删除',
       success: res => res.cancel ||
-        Passwords.setItem(passwords).remove(id)
-          .then(passwords => this.setData({ passwords }))
+        Safes.remove(safe)
+          .then(safes => this.setData({ safes }))
     })
   },
 
-  copyPassword(e) {
-    const id = e.currentTarget.dataset.index
-    const passwords = this.data.passwords
-    const item = Passwords.setItem(passwords).find(id)
+  copySafe(e) {
+    const index = e.currentTarget.dataset.index
+    const safe = this.data.safes[index]
 
     wx.setClipboardData({
-      data: item.password,
-      success: () => wx.showToast({
-        title: '密码已复制',
-        mask: true,
-        duration: 2000
-      })
+      data: safe.password,
+      success: () => Safes._toast('密码已复制')
     })
-  }
+  },
+
+  toggleSafe(e) {
+    const index = e.currentTarget.dataset.index
+    const safe = this.data.safes[index]
+    Safes.toggle(safe).then(safes => this.setData({ safes }))
+  },
 
 })
