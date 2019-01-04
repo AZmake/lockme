@@ -1,6 +1,4 @@
 /**搜索框部分**/
-.index-input {}
-
 .input-wrap {
   flex-grow: 1;
 }

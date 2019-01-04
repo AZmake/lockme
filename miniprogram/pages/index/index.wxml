@@ -11,6 +11,7 @@
     </view>
 
     <button class="input-button button margin-left"
+      data-index="{{0}}"
       bindtap="showPasswordForm">
       创建
     </button>
@@ -88,7 +89,7 @@
     <view class="index-list flex margin-bottom">
       <view class="index-content flex">
         <view class="list-content flex cross-center">
-          <text catchtap="addPassword" class="button">保存</text>
+          <text catchtap="addOrEditPassword" class="button">保存</text>
           <text catchtap="hiddenPasswordForm" class="button">取消</text>
         </view>
       </view>
@@ -111,6 +112,9 @@
           <text class="iconfont icon-copy"
             data-index="{{item._id}}"
             catchtap="copyPassword"></text>
+          <text class="iconfont icon-edit"
+            data-index="{{item._id}}"
+            catchtap="showPasswordForm"></text>
           <text class="iconfont icon-delete"
             data-index="{{item._id}}"
             catchtap="delPassword"></text>

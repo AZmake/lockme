@@ -120,22 +120,33 @@ Page({
     this.setData({password: { ...password, password: value }})
   },
 
-  showPasswordForm() {
-    const name = this.data.name
-    const password = this.data.password
-    const checkedItems = this.data.checkedItems
+  showPasswordForm(e) {
+    const id = e.currentTarget.dataset.index
+    const passwords = this.data.passwords
+    let password = this.data.password
+    let checkedItems = this.data.checkedItems
 
+    if (id == 0) {
+      password = { ...password, name: this.data.name }
+    } else {
+      password = Passwords.setItem(passwords).find(id)
+      password.include = Passwords.getPasswordInclude(password)
+      password.length = password.password.length
+    }
+    
     this.setData({
       name: '',
+      password,
       isShowPasswordForm: true,
-      password: { ...password, name },
       checkedItems: checkedItems.map(i => ({
         ...i,
         checked: password.include.includes(i.value),
-      }))
+      })), 
     })
 
-    this.setPasswordRandomValue()
+    if (id == 0) {
+      this.setPasswordRandomValue()
+    }
   },
 
   hiddenPasswordForm() {
@@ -153,12 +164,20 @@ Page({
     })
   },
 
-  addPassword(e) {
+  addOrEditPassword(e) {
     let passwords = this.data.passwords
     let data = this.data.password
 
-    if(Passwords.setItem(passwords).valid(data)) {
+    if(!Passwords.setItem(passwords).valid(data)) {
+      return;
+    }
+
+    if (!data._id) {
       Passwords.setItem(passwords).add(data)
+        .then(passwords => this.setData( { passwords, name: '' }))
+        .then(() => this.hiddenPasswordForm())
+    } else {
+      Passwords.setItem(passwords).edit(data)
         .then(passwords => this.setData( { passwords, name: '' }))
         .then(() => this.hiddenPasswordForm())
     }
