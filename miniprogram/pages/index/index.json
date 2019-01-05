@@ -1,6 +1,8 @@
 {
   "enablePullDownRefresh": true,
   "usingComponents": {
+    "safe-form": "../../components/SafeForm",
+    "safe-list": "../../components/SafeList",
     "safe-list-message": "../../components/SafeListMessage"
   }
 }

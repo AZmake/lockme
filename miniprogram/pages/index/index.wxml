@@ -10,142 +10,43 @@
         confirm-type="search" />
     </view>
 
-    <button class="input-button button margin-left"
+    <button class="input-button margin-left"
       disabled="{{form.show}}"
-      data-index="{{-1}}"
-      bindtap="showForm">
+      bindtap="addSafe">
       创建
     </button>
   </view>
 
   <!-- 密码表单 -->
-  <block wx:if="{{form.show}}">
-    <view class="index-list flex margin-bottom">
-      <view class="index-header flex">
-        <view class="list-header-name flex cross-center">
-          <text>账号相关</text>
-        </view>
-      </view>
-      <view class="index-content flex">
-        <view class="list-content flex cross-center">
-          <text class="list-content-name margin-left">名称</text>
-          <input class="list-content-desc margin-right"
-            placeholder="输入账号名称"
-            data-prop="name"
-            bindinput="setFormProp"
-            value="{{safe.name}}" />
-        </view>
-        <view class="list-content flex cross-center">
-          <text class="list-content-name margin-left">账号</text>
-          <input class="list-content-desc margin-right"
-            placeholder="输入账号"
-            data-prop="account"
-            bindinput="setFormProp"
-            value="{{safe.account}}" />
-        </view>
-        <view class="list-content flex cross-center">
-          <text class="list-content-name margin-left">备注</text>
-          <input class="list-content-desc margin-right"
-            placeholder="输入备注"
-            data-prop="note"
-            bindinput="setFormProp"
-            value="{{safe.note}}" />
-        </view>
-      </view>
-    </view>
-    <view class="index-list flex margin-bottom">
-      <view class="index-header flex">
-        <view class="list-header-name flex cross-center">
-          <text>密码相关</text>
-        </view>
-      </view>
-      <view class="index-content flex">
-        <view class="list-content flex cross-center" style="height: 120rpx;">
-          <text class="list-content-name margin-left">包含字符</text>
-          <checkbox-group class="list-content-desc flex margin-right"
-            style="flex-wrap: wrap;"
-            data-prop="elements"
-            bindchange="setFormProp">
-            <label class="checkbox"
-              wx:for="{{form.checks}}"
-              wx:key="{{item.value}}">
-              <checkbox
-                value="{{item.value}}"
-                checked="{{item.checked}}" />
-              <view>{{item.name}}</view>
-            </label>
-          </checkbox-group>
-        </view>
-        <view class="list-content flex cross-center">
-          <text class="list-content-name margin-left">密码长度</text>
-          <slider class="list-content-desc margin-right"
-            min="4" max="15" block-size="12"
-            data-prop="length"
-            bindchange="setFormProp"
-            value="{{safe.length}}" />
-        </view>
-        <view class="list-content flex cross-center">
-          <text class="list-content-name margin-left">密码</text>
-          <input class="list-content-desc margin-right"
-            placeholder="输入密码"
-            data-prop="password"
-            bindinput="setFormProp"
-            value="{{safe.password}}" />
-        </view>
-      </view>
-    </view>
-    <view class="index-list flex margin-bottom">
-      <view class="index-content flex">
-        <view class="list-content flex cross-center">
-          <text catchtap="sumbitForm" class="button">保存</text>
-          <text catchtap="hiddenForm" class="button">取消</text>
-        </view>
-      </view>
-    </view>
-  </block>
+  <safe-form class="flex"
+    wx:if="{{form.show}}"
 
-  <block wx:if="{{!form.show}}">
-    <!-- 密码列表 -->
-    <view class="index-list flex margin-bottom"
-      wx:for="{{safes}}"
-      wx:key="{{index}}"
-      data-index="{{index}}"
-      catchtap="toggleSafe">
-      <view class="index-header flex">
-        <view class="list-header-name flex cross-center">
-          <text>{{item.name}}</text>
-        </view>
-        <view class="list-header-option flex cross-center main-center">
-          <text class="iconfont icon-copy"
-            data-index="{{index}}"
-            catchtap="copySafe"></text>
-          <text class="iconfont icon-edit"
-            data-index="{{index}}"
-            catchtap="showForm"></text>
-          <text class="iconfont icon-delete"
-            data-index="{{index}}"
-            catchtap="delSafe"></text>
-        </view>
-      </view>
-      <view class="index-content flex" hidden="{{!item.show}}">
-        <view wx:if="{{item.account !== ''}}" class="list-content flex cross-center">
-          <text class="list-content-name margin-left">账号</text>
-          <text class="list-content-desc margin-right">{{item.account}}</text>
-        </view>
-        <view class="list-content flex cross-center">
-          <text class="list-content-name margin-left">密码</text>
-          <text class="list-content-desc margin-right">{{item.password}}</text>
-        </view>
-        <view wx:if="{{item.note !== ''}}" class="list-content flex cross-center">
-          <text class="list-content-name margin-left">备注</text>
-          <text class="list-content-desc margin-right">{{item.note}}</text>
-        </view>
-      </view>
-    </view>
+    safe="{{safe}}"
+    theme="{{theme}}"
+    
+    bindsubmitform="submitForm"
+    bindcancelform="cancelForm">
+  </safe-form>
 
-    <!-- 无密码列表提示 -->
-    <safe-list-message class="flex"
-      wx:if="{{safes.length === 0 && !form.show}}"
-      message="{{ keyword.length > 0 ? message.notFound : message.notData }}"></safe-list-message>
-  </block>
+  <!-- 密码列表 -->
+  <safe-list class="flex"
+    wx:if="{{!form.show}}"
+
+    wx:for="{{safes}}"
+    wx:key="{{index}}"
+
+    index="{{index}}"
+    safe="{{item}}"
+
+    bindtogglesafe="toggleSafe"
+    bindcopysafe="copySafe"
+    bindeditsafe="editSafe"
+    binddelsafe="delSafe">
+  </safe-list>
+
+  <!-- 密码列表提示 -->
+  <safe-list-message class="flex"
+    wx:if="{{safes.length === 0 && !form.show}}"
+    message="{{ keyword.length > 0 ? message.notFound : message.notData }}">
+  </safe-list-message>
 </view>

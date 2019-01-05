@@ -11,12 +11,6 @@ Page({
     safe: new Safe(),
     form: {
       show: false,
-      checks: [
-        { value: 'lowercase', name: '小写字母', checked: false },
-        { value: 'uppercase', name: '大写字母', checked: false },
-        { value: 'number', name: '数字', checked: false },
-        { value: 'special', name: '特殊符号', checked: false },
-      ],
     },
     message: {
       notFound: '搜索不到数据',
@@ -60,34 +54,21 @@ Page({
     this.setData({ safe: safe })
   },
 
-  showForm(e) {
-    const index = e.currentTarget.dataset.index
-    const safe = index === -1
-      ? new Safe({ name: this.data.keyword })
-      : this.data.safes[index]
-
-    const checks = this.data.form.checks.map(i => ({
-        ...i,
-        checked: safe.elements.includes(i.value),
-    }))
-
+  showForm(safe) {
     this.setData({
       safe,
       keyword: '',
-      form: { show: true, checks: checks }
+      form: { show: true }
     })
   },
 
-  hiddenForm() {
-    const form = this.data.form
-    this.setData({
-      safe: new Safe(),
-      form: { ...form, show: false }
-    })
+  cancelForm() {
+    this.setData({form: { show: false }})
   },
 
-  sumbitForm(e) {
-    const safe = this.data.safe
+  submitForm(e) {
+    const safe = e.detail.safe
+    
     if(!Safes.valid(safe)) {
       return 
     }
@@ -96,7 +77,7 @@ Page({
     
     Safes[option](safe)
       .then(safes => this.setData( { safes }))
-      .then(() => this.hiddenForm())
+      .then(() => this.cancelForm())
   },
 
   getSafes() {
@@ -108,9 +89,31 @@ Page({
     Safes.search(keyword).then(safes => this.setData({ safes }))
   },
 
+  toggleSafe(e) {
+    const safe = e.detail.safe
+    Safes.toggle(safe).then(safes => this.setData({ safes }))
+  },
+
+  copySafe(e) {
+    const safe = e.detail.safe
+
+    wx.setClipboardData({
+      data: safe.password,
+      success: () => Safes._toast('密码已复制')
+    })
+  },
+
+  addSafe() {
+    this.showForm(new Safe({ name: this.data.keyword }))
+  },
+
+  editSafe(e) {
+    const safe = e.detail.safe
+    this.showForm(Safes.find(safe._id))
+  },
+
   delSafe(e) {
-    const index = e.currentTarget.dataset.index
-    const safe = this.data.safes[index]
+    const safe = e.detail.safe
     wx.showModal({
       title: '提示',
       content: '确认删除',
@@ -119,21 +122,4 @@ Page({
           .then(safes => this.setData({ safes }))
     })
   },
-
-  copySafe(e) {
-    const index = e.currentTarget.dataset.index
-    const safe = this.data.safes[index]
-
-    wx.setClipboardData({
-      data: safe.password,
-      success: () => Safes._toast('密码已复制')
-    })
-  },
-
-  toggleSafe(e) {
-    const index = e.currentTarget.dataset.index
-    const safe = this.data.safes[index]
-    Safes.toggle(safe).then(safes => this.setData({ safes }))
-  },
-
 })

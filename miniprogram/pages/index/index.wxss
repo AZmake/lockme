@@ -26,3 +26,21 @@
   border: 1px #fff solid;
 }
 /**搜索框部分**/
+
+/**搜索按钮部分**/
+.index-input button {
+  width: 125rpx;
+  line-height: 52rpx;
+
+  padding: 20rpx;
+  font-size: 32rpx;
+
+  color: #fff;
+  background: #B4373A;
+}
+
+.theme-white .index-input button {
+  color: #fff;
+  background: #000;
+}
+/**搜索按钮部分**/
