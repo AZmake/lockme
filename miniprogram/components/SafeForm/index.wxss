@@ -1,0 +1,35 @@
+@import "../SafeList/index.wxss";
+
+.safe-form {
+  flex-wrap: wrap;
+}
+
+.checkbox view {
+  
+  width: 125rpx;
+  text-align: left;
+  display: inline-block;
+}
+
+.checkbox {
+  width: 50%;
+}
+
+.checkbox-item {
+  margin: 0;
+  padding: 0;
+  transform: scale(0.7);
+}
+
+.list-content .button {
+  width: 50%;
+  text-align: center;
+}
+
+.theme-black.list-content .button {
+  border-right: 1px #353435 solid;
+}
+
+.theme-white.list-content .button {
+  border-right: 1px #F8F8F8 solid;
+}

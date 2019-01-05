@@ -1,0 +1,85 @@
+
+<view class="safe-form theme-{{theme}}">
+  <view class="index-list flex margin-bottom">
+    <view class="index-header flex">
+      <view class="list-header-name flex cross-center">
+        <text>账号相关</text>
+      </view>
+    </view>
+    <view class="index-content flex">
+      <view class="list-content flex cross-center">
+        <text class="list-content-name margin-left">名称</text>
+        <input class="list-content-desc margin-right"
+          placeholder="输入账号名称"
+          data-prop="name"
+          bindinput="setProp"
+          value="{{safe.name}}" />
+      </view>
+      <view class="list-content flex cross-center">
+        <text class="list-content-name margin-left">账号</text>
+        <input class="list-content-desc margin-right"
+          placeholder="输入账号"
+          data-prop="account"
+          bindinput="setProp"
+          value="{{safe.account}}" />
+      </view>
+      <view class="list-content flex cross-center">
+        <text class="list-content-name margin-left">备注</text>
+        <input class="list-content-desc margin-right"
+          placeholder="输入备注"
+          data-prop="note"
+          bindinput="setProp"
+          value="{{safe.note}}" />
+      </view>
+    </view>
+  </view>
+  <view class="index-list flex margin-bottom">
+    <view class="index-header flex">
+      <view class="list-header-name flex cross-center">
+        <text>密码相关</text>
+      </view>
+    </view>
+    <view class="index-content flex">
+      <view class="list-content flex cross-center" style="height: 120rpx;">
+        <text class="list-content-name margin-left">包含字符</text>
+        <checkbox-group class="list-content-desc flex margin-right"
+          data-prop="elements"
+          bindchange="setProp">
+          <label class="checkbox"
+            wx:for="{{checks}}"
+            wx:key="{{item.value}}">
+            <checkbox
+              class="checkbox-item"
+              value="{{item.value}}"
+              checked="{{item.checked}}"/>
+            <view>{{item.name}}</view>
+          </label>
+        </checkbox-group>
+      </view>
+      <view class="list-content flex cross-center">
+        <text class="list-content-name margin-left">密码长度</text>
+        <slider class="list-content-desc margin-right"
+          min="4" max="15" block-size="12"
+          data-prop="length"
+          bindchange="setProp"
+          value="{{safe.length}}" />
+      </view>
+      <view class="list-content flex cross-center">
+        <text class="list-content-name margin-left">密码</text>
+        <input class="list-content-desc margin-right"
+          placeholder="输入密码"
+          data-prop="password"
+          bindinput="setProp"
+          value="{{safe.password}}" />
+      </view>
+    </view>
+  </view>
+  <view class="index-list flex margin-bottom">
+    <view class="index-content flex">
+      <view class="list-content flex cross-center">
+        <text data-event="submit" catchtap="event" class="button">保存</text>
+        <text data-event="cancel" catchtap="event" class="button">取消</text>
+      </view>
+    </view>
+  </view>
+</view>
