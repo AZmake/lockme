@@ -1,0 +1,8 @@
+<view class="index-list flex margin-bottom theme-{{theme}}">
+  <view class="index-header flex main-start">
+    <view class="list-header-name flex cross-center">
+      <text>{{message}}</text>
+    </view>
+  </view>
+</view>
+  
