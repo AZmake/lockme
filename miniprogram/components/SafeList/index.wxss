@@ -1,0 +1,104 @@
+@import "../Base/index.wxss";
+
+/**密码列表整体结构**/
+.index-list {
+  flex-wrap: wrap;
+  border-radius: 10rpx;
+}
+
+.index-list.theme-white {
+  background: #fff;
+}
+
+.index-list.theme-black  {
+  background: #4D4C4D;
+}
+/**密码列表整体结构**/
+
+/**密码列表头部**/
+.index-header {
+  height: 100rpx;
+}
+
+.list-header-name {
+  flex-grow: 1;
+  margin-left: 20rpx;
+}
+
+.list-header-option {
+  margin-right: 20rpx;
+  width: 250rpx;
+  flex-grow: 0;
+  text-align: right;
+}
+
+.iconfont {
+  font-size: 50rpx;
+  margin-left: 20rpx;
+}
+/**密码列表头部**/
+
+/**密码列表详情**/
+.index-content {
+  flex-wrap: wrap;
+}
+
+.list-content {
+  height: 80rpx;
+}
+
+.theme-black .list-content {
+  border-top: 1px #353435 solid;
+}
+
+.theme-white .list-content {
+  border-top: 1px #F8F8F8 solid;
+}
+
+.checkbox view {
+  margin-left: 20rpx;
+  width: 125rpx;
+  text-align: left;
+  display: inline-block;
+}
+
+.checkbox {
+  width: 50%;
+}
+
+.list-content checkbox .wx-checkbox-input {
+  margin: 0;
+  width: 32rpx; 
+  height: 32rpx;
+}
+
+.list-content .button {
+  width: 50%;
+  text-align: center;
+}
+
+
+.theme-black .list-content .button {
+  border-right: 1px #353435 solid;
+}
+
+.theme-white .list-content .button {
+  border-right: 1px #F8F8F8 solid;
+}
+
+.list-content .button:last-child {
+  border: none;
+}
+
+.list-content-name {
+  width: 25%;
+  flex-grow: 1;
+}
+
+.list-content-desc {
+  width: 75%;
+  text-align: right;
+  flex-grow: 0;
+}
+
+
