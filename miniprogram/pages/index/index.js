@@ -20,15 +20,24 @@ Page({
     },
   },
 
+  onLoad() { 
+    this.getSafes()
+  },
+
   onShow() {
-    this.setData({ theme: app.globalData.themeName })
-    Safes.get().then(safes => this.setData({ safes }))
+    app.globalData.changeTheme()
+    this.setData({ theme: app.globalData.theme.name })
+  },
+
+  onPullDownRefresh() {
+    this.getSafes().then(() => wx.stopPullDownRefresh())
+    this.searchSafes()
   },
 
   setKeyword(e) {
     const keyword = e.detail.value
-    this.setData({ keyword, })
-    Safes.search(keyword).then(safes => this.setData({ safes }))
+    this.setData({ keyword })
+    this.searchSafes()
   },
 
   setFormProp(e) {
@@ -84,6 +93,15 @@ Page({
     Safes[option](safe)
       .then(safes => this.setData( { safes }))
       .then(() => this.hiddenForm())
+  },
+
+  getSafes() {
+    return Safes.get().then(safes => this.setData({ safes }))
+  },
+
+  searchSafes() {
+    const keyword = this.data.keyword
+    Safes.search(keyword).then(safes => this.setData({ safes }))
   },
 
   delSafe(e) {

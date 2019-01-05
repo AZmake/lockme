@@ -1,5 +1,5 @@
 import Config from './utils/Config'
-console.log(Config)
+
 App({
   onLaunch() {
     
@@ -15,7 +15,7 @@ App({
     })
 
     // GlobalData 初始化
-    this.initGlobalData() 
+    this.globalData = { ...Config }
 
     // 设置 openid
     wx.cloud.callFunction({
@@ -24,7 +24,11 @@ App({
     })
 
     // 更换主题方法
-    this.globalData.changeTheme = function () {
+    this.globalData.changeTheme = function (name) {
+      if(name) {
+        this.theme = this.themes[name]
+      }
+
       this.theme.items.forEach(i => wx.setTabBarItem(i))
       wx.setTabBarStyle(this.theme.tabBarStyle)
       wx.setNavigationBarColor(this.theme.navigationBar)
@@ -33,22 +37,6 @@ App({
     // TODO 设置 publickey
     this.globalData.publicKey = 'pushmetop'
     this.globalData.privateKey = 'pushmetop'
-    this.globalData.themeName = Config.themeName
-  },
-
-  initGlobalData() {
-    this.globalData = { ...Config }
-
-    Object.defineProperty(this.globalData, 'themeName', {
-      get: function () {
-        this.changeTheme()
-        return this.realThemeName
-      },
-      set: function (name) {
-        this.realThemeName = name
-        this.theme = this.themes[name]
-        this.changeTheme()
-      }
-    })
+    this.globalData.changeTheme(Config.themeName)
   }
 })

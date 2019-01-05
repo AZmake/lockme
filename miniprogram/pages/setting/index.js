@@ -2,26 +2,27 @@ const app = getApp()
 
 Page({
   data: {
-    themeName: '',
+    theme: '',
     indexTheme: 0,
     themes: [],
   },
 
   onLoad: function (options) {
     this.setData({
-      themeName: app.globalData.themeName,
+      theme: app.globalData.theme.name,
       themes: Object.keys(app.globalData.themes),
     })
   },
 
   onShow() {
-    this.setData({ themeName: app.globalData.themeName })
+    app.globalData.changeTheme()
+    this.setData({ theme: app.globalData.theme })
   },
 
   changeTheme(e) {
     let indexTheme = e.detail.value
-    let themeName = this.data.themes[indexTheme]
-    app.globalData.themeName = themeName
-    this.setData({ themeName, indexTheme })
+    let theme = this.data.themes[indexTheme]
+    app.globalData.changeTheme(theme)
+    this.setData({ theme, indexTheme })
   }
 })
