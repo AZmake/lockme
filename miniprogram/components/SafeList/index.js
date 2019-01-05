@@ -31,6 +31,11 @@ Component({
     ]
   },
 
+  attached() {
+    const safe = new Safe(this.data.safe)
+    this.setData({ safe })
+  },
+
   /**
    * 组件的方法列表
    */
