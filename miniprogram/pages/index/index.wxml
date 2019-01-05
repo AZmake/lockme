@@ -144,12 +144,8 @@
     </view>
 
     <!-- 无密码列表提示 -->
-    <view class="index-list flex margin-bottom">
-      <view wx:if="{{safes.length === 0}}" class="index-header flex main-start">
-        <view class="list-header-name flex cross-center">
-          <text>╮(╯_╰)╭ {{ keyword.length > 0 ? '搜索不到数据' : '暂无数据，您可以进行创建' }}</text>
-        </view>
-      </view>
-    </view>
+    <safe-list-message class="flex"
+      wx:if="{{safes.length === 0 && !form.show}}"
+      message="{{ keyword.length > 0 ? message.notFound : message.notData }}"></safe-list-message>
   </block>
 </view>

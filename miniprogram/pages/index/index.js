@@ -18,6 +18,10 @@ Page({
         { value: 'special', name: '特殊符号', checked: false },
       ],
     },
+    message: {
+      notFound: '搜索不到数据',
+      notData: '暂无数据，您可以进行创建',
+    },
   },
 
   onLoad() { 
