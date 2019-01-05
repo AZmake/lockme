@@ -1,0 +1,31 @@
+<view class="safe-list flex theme-{{theme}}">
+  <view class="index-list flex margin-bottom"
+    data-event="{{'toggle'}}"
+    catchtap="event">
+    <!-- 头部 -->
+    <view class="index-header flex">
+      <view class="list-header-name flex cross-center">
+        <text>{{safe.name}}</text>
+      </view>
+
+      <view class="list-header-option flex cross-center main-center">
+        <text class="iconfont icon-{{item.icon}}"
+          wx:for="{{options}}"
+          wx:key="{{item.icon}}"
+          data-event="{{item.event}}"
+          catchtap="event"></text>
+      </view>
+    </view>
+
+    <!-- 详情 -->
+    <view class="index-content flex" hidden="{{!safe.show}}">
+      <view class="list-content flex cross-center"
+        wx:for="{{contents}}"
+        wx:key="{{index}}"
+        wx:if="{{safe[item.key] !== ''}}">
+        <text class="list-content-name margin-left">{{item.name}}</text>
+        <text class="list-content-desc margin-right">{{safe[item.key]}}</text>
+      </view>
+    </view>
+  </view>
+</view>

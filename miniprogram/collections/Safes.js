@@ -33,8 +33,8 @@ export class SafeCollection extends Collection {
     return this.removeToast(item)
   }
 
-  find(id) {
-    return this.items.filter(i => i._id == id)[0]
+  find(_id) {
+    return this.items.filter(i => i._id == _id)[0]
   }
 
   search(keyword) {
