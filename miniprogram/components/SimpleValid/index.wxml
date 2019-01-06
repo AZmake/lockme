@@ -1,0 +1,41 @@
+<view class="simple-valid theme-{{theme}}">
+  <view class="header">
+    <view class="title">
+      <view class="message {{error ? 'error' : ''}}">
+        {{message}}
+      </view>
+    </view>
+
+    <view class="boxs">
+      <input class="box"
+        wx:for="{{length}}"
+        wx:key="{{index}}"
+
+        password='{{ispassword}}'
+        value="{{value[index] ? value[index] : ''}}"
+        bindtap="setFocus"
+        disabled></input>
+    </view>
+  </view>
+
+  <view class="body"></view>
+
+  <view class="footer" hidden="{{!focus}}">
+    <view class="buttons"
+      wx:for="{{keyboard}}" 
+      wx:for-index="col"
+      wx:for-item="colItem"
+      wx:key="{{col}}">
+      <view class="button"
+        wx:for="{{colItem}}"
+        wx:for-index="row"
+        wx:for-item="rowItem"
+        wx:key="{{col}}{{row}}"
+        data-value="{{rowItem.value}}"
+        data-type="{{rowItem.type}}"
+        bindtap="event">
+        <text >{{rowItem.text}}</text>
+      </view>
+    </view>
+  </view>
+</view>
