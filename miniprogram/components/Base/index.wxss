@@ -4,12 +4,20 @@
   width: 100%;
 }
 
+.flex.wrap {
+  flex-wrap: wrap;
+}
+
 .main-start {
   justify-content: flex-start;
 }
 
 .main-center {
   justify-content: center;
+}
+
+.main-around {
+  justify-content: space-around;
 }
 
 .cross-center {
@@ -32,6 +40,11 @@
 
 .margin-left {
   margin-left: 20rpx;
+}
+
+.full-height {
+  position: absolute;
+  min-height: 100%;
 }
 /**边距**/
 
