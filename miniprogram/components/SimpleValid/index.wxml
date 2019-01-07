@@ -1,11 +1,6 @@
-<view class="simple-valid theme-{{theme}}">
-  <view class="header">
-    <view class="title">
-      <view class="message {{error ? 'error' : ''}}">
-        {{message}}
-      </view>
-    </view>
-
+<fixed-bottom class="simple-valid theme-{{theme}}">
+  <!-- header -->
+  <slot-message slot="header" message="{{[message]}}" error="{{error}}">
     <view class="boxs">
       <input class="box"
         wx:for="{{length}}"
@@ -16,13 +11,12 @@
         bindtap="setFocus"
         disabled></input>
     </view>
-  </view>
+  </slot-message>
 
-  <view class="body"></view>
-
-  <view class="footer" hidden="{{!focus}}">
+  <!-- footer -->
+  <view slot="footer" class="keyboard" hidden="{{!focus}}">
     <view class="buttons"
-      wx:for="{{keyboard}}" 
+      wx:for="{{keyboard[type]}}" 
       wx:for-index="col"
       wx:for-item="colItem"
       wx:key="{{col}}">
@@ -38,4 +32,4 @@
       </view>
     </view>
   </view>
-</view>
+</fixed-bottom>

@@ -1,3 +1,40 @@
+let baseKeyboard = [
+  [
+    { text: '1', value: '1', type: 'button' }, 
+    { text: '2', value: '2', type: 'button' }, 
+    { text: '3', value: '3', type: 'button' },
+  ],
+  [
+    { text: '4', value: '4', type: 'button' }, 
+    { text: '5', value: '5', type: 'button' }, 
+    { text: '6', value: '6', type: 'button' },
+  ],
+  [
+    { text: '7', value: '7', type: 'button' }, 
+    { text: '8', value: '8', type: 'button' },
+    { text: '9', value: '9', type: 'button' }, 
+  ],
+  [
+    { text: '返回', value: '返回', type: 'cancel' },
+    { text: '0', value: '0', type: 'button' },
+    { text: '删除', value: '删除', type: 'delete' },
+  ],
+]
+
+let nextKeyboard = [
+  ...baseKeyboard,
+  [
+    { text: '下一步', value: '下一步', type: 'confirm' }, 
+  ],
+]
+
+let confirmKeyboard = [
+  ...baseKeyboard,
+  [
+    { text: '确认', value: '确认', type: 'confirm' }, 
+  ],
+]
+
 Component({
   /**
    * 组件的属性列表
@@ -31,33 +68,13 @@ Component({
       type: Boolean,
       value: false,
     },
-    keyboard: {
-      type: Array,
-      value: [
-        [
-          { text: '1', value: '1', type: 'button' }, 
-          { text: '2', value: '2', type: 'button' }, 
-          { text: '3', value: '3', type: 'button' },
-        ],
-        [
-          { text: '4', value: '4', type: 'button' }, 
-          { text: '5', value: '5', type: 'button' }, 
-          { text: '6', value: '6', type: 'button' },
-        ],
-        [
-          { text: '7', value: '7', type: 'button' }, 
-          { text: '8', value: '8', type: 'button' },
-          { text: '9', value: '9', type: 'button' }, 
-        ],
-        [
-          { text: '返回', value: '返回', type: 'cannel' },
-          { text: '0', value: '0', type: 'button' },
-          { text: '删除', value: '删除', type: 'delete' },
-        ],
-        [
-          { text: '确认', value: '确认', type: 'confirm' }, 
-        ],
-      ]
+    type: {
+      type: String,
+      value: 'baseKeyboard'
+    },
+    value: {
+      type: String,
+      value: ''
     },
   },
 
@@ -65,7 +82,11 @@ Component({
    * 组件的初始数据
    */
   data: {
-    value: '12343',
+    keyboard: {
+      baseKeyboard,
+      nextKeyboard,
+      confirmKeyboard,
+    },
   },
 
   /**
@@ -89,6 +110,7 @@ Component({
         default: this.triggerEvent(`${type}`, { value })
       }
     },
+
     setButton(e) {
       const length = this.data.length
       const value = this.data.value
@@ -98,6 +120,7 @@ Component({
         this.setData({ value: value + char })
       }
     },
+
     setDelete(e) {
       const value = this.data.value
       this.setData({ value: value.substr(0, value.length - 1) })

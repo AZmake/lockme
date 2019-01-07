@@ -1,3 +1,5 @@
+@import "../Base/index.wxss";
+
 /* 整体样式 */
 .simple-valid {
   display: flex;
@@ -5,33 +7,6 @@
   flex-direction: column;
   min-height: 100%;
   max-height: 100%;
-}
-
-.header {
-  margin: 20rpx;
-
-  display: flex;
-  flex-grow: 0;
-  flex-wrap: wrap;
-}
-
-/* 头部 */
-.title {
-  height: 150rpx;
-  width: 100%;
-  margin: 50rpx 0;
-
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-
-.title .message {
-  font-size: 50rpx;
-}
-
-.title .message.error {
-  color: #B4373A;
 }
 
 /* 主体 */
@@ -60,7 +35,7 @@
 }
 
 /* 底部 */
-.footer {
+.keyboard {
   width: 100%;
 
   display: flex;
@@ -68,14 +43,14 @@
   flex-wrap: wrap;
 }
 
-.footer .buttons {
+.keyboard .buttons {
   display: -webkit-box;
   display: -moz-box;
   display: box;
   width: 100%;
 }
 
-.footer .button {
+.keyboard .button {
   height: 120rpx;
 
   width:1%;
