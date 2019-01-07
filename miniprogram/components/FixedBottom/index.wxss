@@ -1,0 +1,29 @@
+@import "../Base/index.wxss";
+
+.fixed-bottom {
+  display: flex;
+  flex-wrap: wrap;
+  width: 100%;
+  min-height: 100%;
+  flex-direction: column;
+}
+
+.padding {
+  padding: 0 50rpx;
+}
+
+.header {
+  display: flex;
+  flex-grow: 0;
+}
+
+.body {
+  display: flex;
+  flex-grow: 1;
+}
+
+/* 底部 */
+.footer {
+  display: flex;
+  flex-grow: 0;
+}
