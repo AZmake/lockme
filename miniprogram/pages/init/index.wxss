@@ -1,0 +1,20 @@
+.message-option .message {
+  font-size: 50rpx;
+}
+
+.message-option .option .button {
+  height: 100rpx;
+  line-height: 50rpx;
+
+  padding: 20rpx;
+  font-size: 32rpx;
+
+  color: #fff;
+  background: #B4373A;
+  width: 100%;
+}
+
+.theme-white .message-option .option .button {
+  color: #fff;
+  background: #000;
+}

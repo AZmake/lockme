@@ -1,0 +1,42 @@
+<block>
+  <view class="container flex theme-{{theme}}">
+
+    <!-- 第一步 -->
+    <fixed-bottom class="flex full-height" wx:if="{{step==1}}">
+      <slot-message class="flex" slot="header"
+        message="{{['为了使用安全', '需要进行初始化设置']}}">
+      </slot-message>
+      <button class="my-button full margin-bottom margin-left margin-right"
+        slot="footer"
+        bindtap="goToTwoStep">下一步</button>
+    </fixed-bottom>
+
+    <!-- 第二步 -->
+    <simple-valid class="flex full-height"
+      wx:if="{{step==2}}"
+
+      message="{{'请设置应用密码'}}"
+      type="{{'nextKeyboard'}}"
+      value="{{password}}"
+      length="{{length}}"
+
+      ispassword="{{true}}"
+      bindcancel="goBackOneStep"
+      bindconfirm="goToThreeStep">
+    </simple-valid>
+
+    <!-- 第三步 -->
+    <simple-valid class="flex full-height"
+      wx:if="{{step==3}}"
+
+      message="{{'请重复应用密码'}}"
+      type="{{'nextKeyboard'}}"
+      value="{{confirmPassword}}"
+      length="{{length}}"
+
+      ispassword="{{true}}"
+      bindcancel="goBackTwoStep"
+      bindconfirm="goToFourStep">
+    </simple-valid>
+  </view>
+</block>

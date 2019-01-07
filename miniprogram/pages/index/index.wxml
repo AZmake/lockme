@@ -1,6 +1,6 @@
 <view class="container theme-{{theme}}">
   <!--输入框-->
-  <view class="index-input flex main-start margin-bottom">
+  <view class="index-input flex main-start margin-top margin-bottom">
 
     <view class="input-wrap">
       <input class="input bg-grey"
@@ -37,6 +37,7 @@
 
     index="{{index}}"
     safe="{{item}}"
+    theme="{{theme}}"
 
     bindtogglesafe="toggleSafe"
     bindcopysafe="copySafe"
