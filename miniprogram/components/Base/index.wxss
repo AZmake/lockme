@@ -76,3 +76,27 @@
 
 .icon-copy:before { content: "\e706"; }
 /**图标字体**/
+
+/**按钮**/
+.my-button {
+  height: 100rpx;
+  line-height: 50rpx;
+
+  padding: 20rpx;
+  font-size: 32rpx;
+}
+
+.my-button.full {
+  width: 100%;
+}
+
+.theme-black .my-button {
+  color: #fff;
+  background: #B4373A;
+}
+
+.theme-white .my-button {
+  color: #fff;
+  background: #000;
+}
+/**按钮**/
