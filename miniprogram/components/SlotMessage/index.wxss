@@ -1,0 +1,11 @@
+@import "../Base/index.wxss";
+
+.message {
+  font-size: 50rpx;
+  margin: 50rpx 0;
+}
+
+.error {
+  color: #B4373A;
+}
+

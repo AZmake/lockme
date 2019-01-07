@@ -1,0 +1,12 @@
+<view class="slot-message flex wrap">
+  <view class="flex wrap message {{ error ? 'error' : ''}}">
+    <view class="flex main-center"
+      wx:for="{{message}}"
+      wx:key="{{index}}">
+      <text>{{item}}</text>
+    </view>
+  </view>
+  <view class="flex slot">
+    <slot></slot>
+  </view>
+</view>
