@@ -8,7 +8,7 @@ Component({
    * 组件的属性列表
    */
   properties: {
-    padding: {
+    margin: {
       type: Boolean,
       value: false,
     },

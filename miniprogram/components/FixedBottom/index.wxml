@@ -1,4 +1,4 @@
-<view class="fixed-bottom {{padding ? 'padding': ''}}">
+<view class="fixed-bottom {{margin ? 'margin': ''}}">
   <view class="header">
     <slot name="header"></slot>
   </view>

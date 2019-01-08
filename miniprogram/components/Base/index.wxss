@@ -80,10 +80,11 @@
 /**按钮**/
 .my-button {
   height: 100rpx;
-  line-height: 50rpx;
-
-  padding: 20rpx;
   font-size: 32rpx;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 .my-button.full {
@@ -98,5 +99,10 @@
 .theme-white .my-button {
   color: #fff;
   background: #000;
+}
+
+.my-button.default {
+  color: #000;
+  background: #F8F8F8;
 }
 /**按钮**/
