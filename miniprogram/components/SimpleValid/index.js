@@ -14,15 +14,15 @@ let baseKeyboard = [
     { text: '8', value: '8', type: 'button' },
     { text: '9', value: '9', type: 'button' }, 
   ],
-  [
-    { text: '返回', value: '返回', type: 'cancel' },
-    { text: '0', value: '0', type: 'button' },
-    { text: '删除', value: '删除', type: 'delete' },
-  ],
 ]
 
 let nextKeyboard = [
   ...baseKeyboard,
+  [
+    { text: '上一步', value: '上一步', type: 'cancel' },
+    { text: '0', value: '0', type: 'button' },
+    { text: '删除', value: '删除', type: 'delete' },
+  ],
   [
     { text: '下一步', value: '下一步', type: 'confirm' }, 
   ],
@@ -30,6 +30,11 @@ let nextKeyboard = [
 
 let confirmKeyboard = [
   ...baseKeyboard,
+  [
+    { text: '返回', value: '返回', type: 'cancel' },
+    { text: '0', value: '0', type: 'button' },
+    { text: '删除', value: '删除', type: 'delete' },
+  ],
   [
     { text: '确认', value: '确认', type: 'confirm' }, 
   ],
