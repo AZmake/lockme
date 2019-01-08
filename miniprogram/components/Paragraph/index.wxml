@@ -1,0 +1,9 @@
+<view class="flex wrap paragraph theme-{{theme}}">
+  <view class="flex title margin-bottom">
+    {{title}}
+  </view>
+  <rich-text class="flex content margin-bottom"
+    bindtap="event"
+    nodes="{{content}}"
+    space="{{space}}"></rich-text>
+</view>

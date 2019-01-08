@@ -1,0 +1,20 @@
+@import "../Base/index.wxss";
+
+.paragraph {
+  flex-grow: 0;
+}
+
+.content {
+  font-size: 32rpx;
+  word-break: break-all;
+  padding: 20rpx;
+  border-radius: 10rpx;
+}
+
+.theme-white .content  {
+  background: #fff;
+}
+
+.theme-black .content {
+  background: #4D4C4D;
+}
