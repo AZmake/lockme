@@ -99,7 +99,6 @@ Page({
 
     wx.setClipboardData({
       data: safe.password,
-      success: () => Safes._toast('密码已复制')
     })
   },
 
