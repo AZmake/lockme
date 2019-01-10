@@ -1,5 +1,13 @@
 @import "./components/Base/index.wxss";
 
+
+/* 盒模型 */
+page, view,
+text, button {
+  box-sizing: border-box;
+}
+/* 盒模型 */
+
 /**整体样式**/
 page {
   min-height: 100%;

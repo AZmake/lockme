@@ -38,5 +38,11 @@ App({
     this.globalData.publicKey = 'pushmetop'
     this.globalData.privateKey = 'pushmetop'
     this.globalData.changeTheme(Config.themeName)
+    this.globalData.crypto = wx.getStorageSync('crypto')
+    this.globalData.facepass = wx.getStorageSync('facepass')
+
+    if (!this.globalData.crypto || !this.globalData.facepass) {
+      wx.navigateTo({ url: '/page/init/index' })
+    }
   }
 })

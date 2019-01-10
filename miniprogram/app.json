@@ -2,7 +2,6 @@
   "pages": [
     "pages/index/index",
     "pages/setting/index",
-    "pages/valid/index",
     "pages/init/index"
   ],
   "window": {
