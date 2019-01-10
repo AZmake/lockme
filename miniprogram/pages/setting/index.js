@@ -7,7 +7,8 @@ Page({
     themes: [],
   },
 
-  onLoad: function (options) {
+  onLoad() {
+    app.pageShow()
     this.setData({
       theme: app.globalData.theme.name,
       themes: Object.keys(app.globalData.themes),
@@ -15,14 +16,15 @@ Page({
   },
 
   onShow() {
-    app.globalData.changeTheme()
+    app.pageShow()
     this.setData({ theme: app.globalData.theme })
   },
 
   changeTheme(e) {
     let indexTheme = e.detail.value
     let theme = this.data.themes[indexTheme]
-    app.globalData.changeTheme(theme)
+
+    app.changeTheme(theme)
     this.setData({ theme, indexTheme })
   }
 })

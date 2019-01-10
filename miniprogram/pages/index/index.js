@@ -19,11 +19,12 @@ Page({
   },
 
   onLoad() { 
+    app.pageLoad()
     this.getSafes()
   },
 
   onShow() {
-    app.globalData.changeTheme()
+    app.pageShow()
     this.setData({ theme: app.globalData.theme.name })
   },
 
