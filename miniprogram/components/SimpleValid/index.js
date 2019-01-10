@@ -120,8 +120,8 @@ Component({
       const length = this.data.length
       const value = this.data.value
       const char  = e.currentTarget.dataset.value
-
-      if (value.length <= length) {
+      
+      if (value.length < length) {
         this.setData({ value: value + char })
       }
     },
