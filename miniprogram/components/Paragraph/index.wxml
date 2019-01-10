@@ -1,9 +1,16 @@
-<view class="flex wrap paragraph theme-{{theme}}">
+<view class="flex wrap paragraph theme-{{theme}}"
+  bindtap="tap">
   <view class="flex title margin-bottom">
     {{title}}
   </view>
   <rich-text class="flex content margin-bottom"
-    bindtap="event"
+    wx:if="{{!istextarea && content.length > 0}}"
     nodes="{{content}}"
     space="{{space}}"></rich-text>
+
+  <textarea class="flex content"
+    wx:if="{{istextarea}}"
+    value="{{value}}"
+    bindinput="setValue"
+    placeholder="{{placeholder}}" />
 </view>
