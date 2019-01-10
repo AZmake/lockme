@@ -34,8 +34,15 @@ export default class {
   }
 
   _closeToast(res) {
-    this._hasToast && wx.hideToast()
-    this._hasLoading && wx.hideLoading()
+    if(this._hasToast) {
+      wx.hideToast()
+      this._hasToast = false
+    }
+
+    if(this._hasLoading) {
+      wx.hideLoading()
+      this._hasLoading = false
+    }
     return res ? res : ''
   }
 }
