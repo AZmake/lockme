@@ -6,7 +6,10 @@
   ],
   "window": {
     "navigationBarTitleText": "LockMe",
-    "backgroundColor": "#000000"
+    "backgroundColor": "#000000",
+    "backgroundTextStyle": "light",
+    "navigationBarBackgroundColor": "#353435",
+    "navigationBarTextStyle": "white"
   },
   "tabBar": {
     "list": [
