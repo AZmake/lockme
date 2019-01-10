@@ -2,6 +2,7 @@ import Base from '../../utils/Base'
 import Crypto from '../../utils/Crypto'
 import PublicKeys from '../../collections/PublicKeys'
 import PublicKey from '../../models/PublicKey'
+
 const app = getApp()
 const base = new Base
 

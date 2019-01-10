@@ -19,6 +19,7 @@
     <simple-valid class="flex full-height"
       wx:if="{{step==2}}"
 
+      theme="{{theme}}"
       message="{{message[2]}}"
       type="{{'nextKeyboard'}}"
       value="{{facepass}}"
@@ -33,6 +34,7 @@
     <simple-valid class="flex full-height"
       wx:if="{{step==3}}"
 
+      theme="{{theme}}"
       message="{{message[3]}}"
       type="{{'nextKeyboard'}}"
       value="{{confirmFacepass}}"
@@ -53,10 +55,12 @@
 
       <view class="flex wrap main-center" slot="body">
         <paragraph class="flex wrap"
+          theme="{{theme}}"
           title="{{'公钥'}}"
           content="{{crypto.publicKey}}">
         </paragraph>
         <paragraph class="flex wrap"
+          theme="{{theme}}"
           title="{{'私钥'}}"
           bindtap="copyPrivateKey"
           content="{{crypto.privateKey}}">
@@ -89,10 +93,12 @@
 
       <view class="flex wrap main-center" slot="body">
         <paragraph class="flex wrap"
+          theme="{{theme}}"
           title="{{'公钥'}}"
           content="{{crypto.publicKey}}">
         </paragraph>
         <paragraph class="flex wrap"
+          theme="{{theme}}"
           title="{{'私钥'}}"
           content="{{crypto.privateKey}}"
           istextarea="{{true}}"

@@ -82,7 +82,8 @@
 
 .theme-white .box.box,
 .theme-white .button {
-  border: 1rpx #fff solid;
+  background: #fff;
+  border: 1rpx #F8F8F8 solid;
 }
 
 
