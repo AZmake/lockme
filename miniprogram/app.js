@@ -23,26 +23,33 @@ App({
       complete: res => this.globalData.openid = res.result.openid,
     })
 
-    // 更换主题方法
-    this.globalData.changeTheme = function (name) {
-      if(name) {
-        this.theme = this.themes[name]
-      }
-
-      this.theme.items.forEach(i => wx.setTabBarItem(i))
-      wx.setTabBarStyle(this.theme.tabBarStyle)
-      wx.setNavigationBarColor(this.theme.navigationBar)
-    }
-
-    // TODO 设置 publickey
-    this.globalData.publicKey = 'pushmetop'
-    this.globalData.privateKey = 'pushmetop'
-    this.globalData.changeTheme(Config.themeName)
+    // 页面数据初始化
+    this.changeTheme(Config.themeName)
     this.globalData.crypto = wx.getStorageSync('crypto')
     this.globalData.facepass = wx.getStorageSync('facepass')
+  },
 
+  pageLoad() {
+    this.isInit()
+  },
+
+  pageShow() {
+    this.changeTheme()
+  },
+
+  isInit() {
     if (!this.globalData.crypto || !this.globalData.facepass) {
-      wx.navigateTo({ url: '/page/init/index' })
+      wx.redirectTo({ url: '/pages/init/index', success:console.log, fail:console.error })
     }
-  }
+  },
+
+  changeTheme(name) {
+    if(name) {
+      this.globalData.theme = this.globalData.themes[name]
+    }
+
+    this.globalData.theme.items.forEach(i => wx.setTabBarItem(i))
+    wx.setTabBarStyle(this.globalData.theme.tabBarStyle)
+    wx.setNavigationBarColor(this.globalData.theme.navigationBar)
+  },
 })
