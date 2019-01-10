@@ -1,6 +1,7 @@
 import Base from '../../utils/Base'
 import Crypto from '../../utils/Crypto'
-
+import PublicKeys from '../../collections/PublicKeys'
+import PublicKey from '../../models/PublicKey'
 const app = getApp()
 const base = new Base
 
@@ -9,8 +10,9 @@ Page({
     theme: '',
     step: 1,
     length: 6,
-    password: '',
-    confirmPassword: '',
+    facepass: '',
+    confirmFacepass: '',
+    registered: false,
     crypto: {
       publicKey: '',
       privateKey: '',
@@ -21,15 +23,34 @@ Page({
       ['请设置应用密码'],
       ['请重复应用密码'],
       ['私钥生成', '点击复制并进行保存'],
+      ['私钥导入', '请在输入框中输入私钥'],
       ['初始化设置完成', '请妥善保管好私钥'],
     ]
   },
 
   onLoad() {
+    if (app.globalData.crypto && app.globalData.facepass) {
+      this.goToIndex()
+    }
+
     this.setData({
       theme: app.globalData.theme.name,
     })
-    this.generatePrivateKey()
+
+    // 判断是否已经设置过私钥了
+    PublicKeys.getOne().then(res => {
+      if (res == null) {
+        this.generatePrivateKey()
+      } else {
+        this.setData({
+          registered: true,
+          crypto: {
+            publicKey: res.value,
+            privateKey: '',
+          }
+        })
+      }
+    })
   },
 
   /* 第一步相关 */
@@ -40,35 +61,43 @@ Page({
 
   /* 第二步相关 */
   goBackOneStep() {
-    this.setData({ step: 1, password: '' })
+    this.setData({ step: 1, facepass: '' })
   },
 
   goToThreeStep(e) {
-    const password = e.detail.value
+    const facepass = e.detail.value
 
-    if (password.length !== this.data.length) {
+    if (facepass.length !== this.data.length) {
       base._toast('密码长度不正确')
     } else {
-      this.setData({ step: 3, password })
+      this.setData({ step: 3, facepass })
     }
   },
   /* 第二步相关 */
 
   /* 第三步相关 */
   goBackTwoStep() {
-    this.setData({ step: 2, confirmPassword: '' })
+    this.setData({ step: 2, confirmFacepass: '' })
   },
 
   goToFourStep(e) {
-    const confirmPassword = e.detail.value
-    const password = this.data.password
-    if (confirmPassword.length !== this.data.length) {
-      base._toast('密码长度不正确')
-    } else if (confirmPassword !== password) {
-      base._toast('两次密码不一致')
+    const confirmFacepass = e.detail.value
+    const facepass = this.data.facepass
+    const registered = this.data.registered
+
+    // 验证数据
+    if (confirmFacepass.length !== this.data.length) {
+      return base._toast('密码长度不正确')
+    } else if (confirmFacepass !== facepass) {
+      return base._toast('两次密码不一致')
+    } 
+    
+    // 进行导入或者生成的跳转
+    if (registered) {
+      this.setData({ step: 5, confirmFacepass })
     } else {
       this.generatePrivateKey()
-      this.setData({ step: 4, confirmPassword })
+      this.setData({ step: 4, confirmFacepass })
     }
   },
   /* 第三步相关 */
@@ -90,19 +119,84 @@ Page({
     })
   },
 
-  goToFiveStep() {
-    // TODO 保存数据
-    this.setData({ step: 5 })
+  goToFinishByGenerate() {
+    const crypto = this.data.crypto
+    const publicKey = new PublicKey({ value: crypto.publicKey })
+    const facepass = this.data.facepass
+
+    PublicKeys.removeAll().then(() => {
+      return PublicKeys.add(publicKey).then(() => {
+        return this.goFinishBefore()
+      })
+    })
   },
   /* 第四步相关 */
 
   /* 第五步相关 */
-  goToCryptoIntro() {
-    wx.navigateTo({ url: 'setting'})
+  setPrivateKey(e) {
+    const privateKey = e.detail.value
+    const crypto = this.data.crypto
+
+    this.setData({
+      crypto: {
+        ...crypto,
+        privateKey,
+      }
+    })
   },
 
-  /* 第五步相关 */  
+  goToFinishByImport() {
+    const { privateKey, publicKey } = this.data.crypto
+    
+    if (privateKey == '') {
+      return base._toast('私钥不能为空')
+    }
+
+    base._loading('校验私钥和公钥是否匹配')
+    const check = Crypto.sm2.getPublicKeyFromPrivateKey(privateKey)
+
+    if(check == publicKey) {
+      base._toast('导入成功')
+      this.goFinishBefore()
+    } else {
+      base._toast('私钥和公钥不匹配\n请确认私钥是否正确')
+    }
+  },
+
+  goToFourStepReset() {
+    wx.showModal({
+      title: '提示',
+      content: '重新生成私钥，将会导致旧私钥相关的密码无法解密',
+      success: (res) => {
+        if (res.confirm) {
+          this.generatePrivateKey()
+          this.setData({ step: 4 })
+        }
+      }
+    })
+  },
+
+  /* 第五步相关 */
+
+  /* 最后一步相关 */ 
+  goFinishBefore() {
+    const crypto = this.data.crypto
+    const facepass = this.data.facepass
+
+    app.globalData.crypto = crypto
+    app.globalData.facepass = facepass
+
+    wx.setStorageSync('crypto', crypto)
+    wx.setStorageSync('facepass', facepass)
+    this.setData({ step: 6 })
+  },
+
+  goToCryptoIntro() {
+    wx.navigateTo({ url: '/page/setting/index?from=init' })
+  },
+
   goToIndex() {
     wx.switchTab({ url: '/pages/index/index' })
   },
+  /* 最后一步相关 */ 
 })
