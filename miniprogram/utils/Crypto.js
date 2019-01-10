@@ -878,7 +878,8 @@ module.exports = {
   doDecrypt: doDecrypt,
   doSignature: doSignature,
   doVerifySignature: doVerifySignature,
-  getPoint: getPoint
+  getPoint: getPoint,
+  getPublicKeyFromPrivateKey: getPublicKeyFromPrivateKey
 };
 
 /***/ }),
