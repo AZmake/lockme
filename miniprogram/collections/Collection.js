@@ -69,8 +69,17 @@ export default class Collection extends Base {
       .then(() => this._toast('删除成功'))
       .then(() => this.items = items)
       .catch(error => {
-        console.log(error)
         this._toast('删除失败', error)
       })
+  }
+
+  removeAll() {
+    return wx.cloud.callFunction({
+      name: 'removeAll',
+      data: {
+        name: this.collectionName,
+        openid: this._globalData.openid,
+      }
+    })
   }
 }
