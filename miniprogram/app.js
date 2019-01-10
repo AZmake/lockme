@@ -39,7 +39,7 @@ App({
 
   isInit() {
     if (!this.globalData.crypto || !this.globalData.facepass) {
-      wx.redirectTo({ url: '/pages/init/index', success:console.log, fail:console.error })
+      wx.redirectTo({ url: '/pages/init/index' })
     }
   },
 
