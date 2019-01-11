@@ -47,6 +47,7 @@
 
   <!-- 密码列表提示 -->
   <safe-list-message class="flex"
+    theme="{{theme}}"
     wx:if="{{safes.length === 0 && !form.show}}"
     message="{{ keyword.length > 0 ? message.notFound : message.notData }}">
   </safe-list-message>

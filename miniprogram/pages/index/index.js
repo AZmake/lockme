@@ -8,7 +8,7 @@ Page({
     theme: '',
     keyword: '',
     safes: [],
-    safe: new Safe(),
+    safe: {},
     form: {
       show: false,
     },
@@ -50,6 +50,10 @@ Page({
 
     if (['elements', 'length'].includes(prop)) {
       safe.generate()
+    }
+
+    if (['password'].includes(prop)) {
+      safe.setEncryptedPassword(e.detail.value)
     }
 
     this.setData({ safe: safe })
