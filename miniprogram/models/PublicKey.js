@@ -9,8 +9,8 @@ export default class PublicKey extends Model {
   }
 
   toJson() {
-    return {
+    return super.toJson({
       value: this.value,
-    }
+    })
   }
 }

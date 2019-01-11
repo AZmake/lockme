@@ -1,4 +1,5 @@
 import Const from '../utils/Const'
+import Crypto from '../utils/Crypto'
 import Model from './Model'
 
 const rules = [
@@ -29,23 +30,25 @@ export default class Safe extends Model {
   }
   
   decrypt(password) {
-    return password ? password : ''
+    const privateKey = this._globalData.crypto.privateKey
+    return password
+      ? Crypto.sm2.doDecrypt(password, privateKey)
+      : ''
   }
 
   encrypt(password) {
-    return password
+    const publicKey = this._globalData.crypto.publicKey
+    return Crypto.sm2.doEncrypt(password, publicKey) 
   }
 
   toJson() {
-    return {
+    return super.toJson({
       name: this.name,
       note: this.note,
       account: this.account,
       publicKey: this.publicKey,
-      encryptedPassword: this.encryptedPassword,
-      create_at: this.created_at,
-      update_at: this._db.serverDate(),
-    }
+      encryptedPassword: this.encrypt(this.password),
+    })
   }
 
   generate() {
@@ -76,7 +79,11 @@ export default class Safe extends Model {
     }
 
     this.password = password
-    this.encryptedPassword = this.encrypt(password)
+    this.setEncryptedPassword(password)
     this.length = password.length
+  }
+
+  setEncryptedPassword(password) {
+    this.encryptedPassword = this.encrypt(password)
   }
 }
