@@ -17,7 +17,7 @@ Page({
 
   onShow() {
     app.pageShow()
-    this.setData({ theme: app.globalData.theme.name })
+    this.setData({ theme: app.setting.theme })
   },
 
   checkedFacepass(e) {
@@ -25,7 +25,10 @@ Page({
     const facepass = app.globalData.facepass
 
     if (value == facepass) {
-      // TODO 计算时间
+      const delay = app.setting.validTime
+      const validEndAt = (new Date).getTime() + delay
+      wx.setStorageSync('validEndAt', validEndAt)
+
       wx.navigateBack({ delta: 1 })
     } else {
       this.setData({ error: true })

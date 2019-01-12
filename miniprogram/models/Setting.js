@@ -8,7 +8,7 @@ export default class Setting extends Model {
 
     this._id = item._id || null
     this.theme = item.theme || Config.defaultTheme
-    this.validTime = item.validTime || Const.VALID_TIME[1].value
+    this.validTime = parseInt(item.validTime || Const.VALID_TIME[1].value)
     this.authentication = item.authentication || false
     
     // 获取 openid

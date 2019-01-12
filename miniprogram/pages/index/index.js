@@ -94,17 +94,33 @@ Page({
     Safes.search(keyword).then(safes => this.setData({ safes }))
   },
 
+  checkValidEndAt() {
+    const validEndAt = parseInt(wx.getStorageSync('validEndAt') || 0)
+    const now = (new Date).getTime()
+
+    if (now < validEndAt) {
+      return true
+    }
+
+    wx.navigateTo({ url: '/pages/valid/index' })
+
+    return false
+  },
+
   toggleSafe(e) {
     const safe = e.detail.safe
-    Safes.toggle(safe).then(safes => this.setData({ safes }))
+    if(this.checkValidEndAt()) {
+      Safes.toggle(safe).then(safes => this.setData({ safes }))
+    }
   },
 
   copySafe(e) {
     const safe = e.detail.safe
-
-    wx.setClipboardData({
-      data: safe.password,
-    })
+    if(this.checkValidEndAt()) {
+      wx.setClipboardData({
+        data: safe.password,
+      })
+    }
   },
 
   addSafe() {
