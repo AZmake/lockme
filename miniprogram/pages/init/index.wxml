@@ -1,148 +1,148 @@
-<block>
-  <view class="container flex theme-{{theme}}">
+<view class="container flex theme-{{theme}}">
 
-    <!-- 第一步 引导 -->
-    <fixed-bottom class="flex full-height"
-      wx:if="{{step==1}}"
-      margin="{{true}}">
-      <slot-message class="flex" slot="header"
-        message="{{message[1]}}">
-      </slot-message>
-      <button class="my-button full"
-        slot="footer"
-        bindtap="goToTwoStep">
+  <!-- 第一步 引导 -->
+  <fixed-bottom class="flex full-height"
+    wx:if="{{step==1}}"
+    margin="{{true}}">
+    <slot-message class="flex" slot="header"
+      message="{{message[1]}}">
+    </slot-message>
+    <button class="my-button full"
+      slot="footer"
+      bindtap="goToTwoStep">
+      <text>下一步</text>
+    </button>
+  </fixed-bottom>
+
+  <!-- 第二步 输入密码 -->
+  <simple-valid class="flex full-height"
+    wx:if="{{step==2}}"
+
+    theme="{{theme}}"
+    message="{{message[2]}}"
+    type="{{'nextKeyboard'}}"
+    value="{{facepass}}"
+    length="{{length}}"
+
+    ispassword="{{true}}"
+    bindcancel="goBackOneStep"
+    bindconfirm="goToThreeStep">
+  </simple-valid>
+
+  <!-- 第三步 确认密码 -->
+  <simple-valid class="flex full-height"
+    wx:if="{{step==3}}"
+
+    theme="{{theme}}"
+    message="{{message[3]}}"
+    type="{{'nextKeyboard'}}"
+    value="{{confirmFacepass}}"
+    length="{{length}}"
+
+    error="{{error}}"
+    ispassword="{{true}}"
+    bindcancel="goBackTwoStep"
+    bindconfirm="goToFourStep">
+  </simple-valid>
+
+  <!-- 第四步 生成-->
+  <fixed-bottom class="flex full-height"
+    wx:if="{{step==4}}"
+    margin="{{true}}">
+    <slot-message class="flex" slot="header"
+      message="{{message[4]}}">
+    </slot-message>
+
+    <view class="flex wrap main-center" slot="body">
+      <paragraph class="flex wrap"
+        theme="{{theme}}"
+        title="{{'公钥'}}"
+        content="{{crypto.publicKey}}">
+      </paragraph>
+      <paragraph class="flex wrap"
+        theme="{{theme}}"
+        title="{{'私钥'}}"
+        bindtap="copyPrivateKey"
+        content="{{crypto.privateKey}}">
+      </paragraph>
+    </view>
+
+    <view class="flex" slot="footer">
+      <button class="my-button default full margin-right"
+        bindtap="goBackThereStep">
+        <text>上一步</text>
+      </button>
+      <button class="my-button default full margin-right"
+        bindtap="generatePrivateKey">
+        <text>重新生成</text>
+      </button>
+      <button class="my-button full"  
+        bindtap="goToFinishByGenerate">
         <text>下一步</text>
       </button>
-    </fixed-bottom>
+    </view>
+  </fixed-bottom>
 
-    <!-- 第二步 输入密码 -->
-    <simple-valid class="flex full-height"
-      wx:if="{{step==2}}"
+  <!-- 第五步 导入 -->
+  <fixed-bottom class="flex full-height"
+    wx:if="{{step==5}}"
+    margin="{{true}}">
+    <slot-message class="flex" slot="header"
+      message="{{message[5]}}"
+      error="{{error}}">
+    </slot-message>
 
-      theme="{{theme}}"
-      message="{{message[2]}}"
-      type="{{'nextKeyboard'}}"
-      value="{{facepass}}"
-      length="{{length}}"
+    <view class="flex wrap main-center" slot="body">
+      <paragraph class="flex wrap"
+        theme="{{theme}}"
+        title="{{'公钥'}}"
+        content="{{crypto.publicKey}}">
+      </paragraph>
+      <paragraph class="flex wrap"
+        theme="{{theme}}"
+        title="{{'私钥'}}"
+        content="{{crypto.privateKey}}"
+        istextarea="{{true}}"
+        placeholder="{{'请输入私钥'}}"
+        bindsetprivatekey="setPrivateKey">
+      </paragraph>
+    </view>
 
-      ispassword="{{true}}"
-      bindcancel="goBackOneStep"
-      bindconfirm="goToThreeStep">
-    </simple-valid>
+    <view class="flex" slot="footer">
+      <button class="my-button default full margin-right"
+        bindtap="goBackThereStep">
+        <text>上一步</text>
+      </button>
+      <button class="my-button default full margin-right"
+        bindtap="goToFourStepReset">
+        <text>重新生成</text>
+      </button>
+      <button class="my-button full"  
+        bindtap="goToFinishByImport">
+        <text>下一步</text>
+      </button>
+    </view>
+  </fixed-bottom>
 
-    <!-- 第三步 确认密码 -->
-    <simple-valid class="flex full-height"
-      wx:if="{{step==3}}"
-
-      theme="{{theme}}"
-      message="{{message[3]}}"
-      type="{{'nextKeyboard'}}"
-      value="{{confirmFacepass}}"
-      length="{{length}}"
-
-      ispassword="{{true}}"
-      bindcancel="goBackTwoStep"
-      bindconfirm="goToFourStep">
-    </simple-valid>
-
-    <!-- 第四步 生成-->
-    <fixed-bottom class="flex full-height"
-      wx:if="{{step==4}}"
-      margin="{{true}}">
-      <slot-message class="flex" slot="header"
-        message="{{message[4]}}">
-      </slot-message>
-
-      <view class="flex wrap main-center" slot="body">
-        <paragraph class="flex wrap"
-          theme="{{theme}}"
-          title="{{'公钥'}}"
-          content="{{crypto.publicKey}}">
-        </paragraph>
-        <paragraph class="flex wrap"
-          theme="{{theme}}"
-          title="{{'私钥'}}"
-          bindtap="copyPrivateKey"
-          content="{{crypto.privateKey}}">
-        </paragraph>
-      </view>
-
-      <view class="flex" slot="footer">
-        <button class="my-button default full margin-right"
-          bindtap="goBackThereStep">
-          <text>上一步</text>
-        </button>
-        <button class="my-button default full margin-right"
-          bindtap="generatePrivateKey">
-          <text>重新生成</text>
-        </button>
-        <button class="my-button full"  
-          bindtap="goToFinishByGenerate">
-          <text>下一步</text>
-        </button>
-      </view>
-    </fixed-bottom>
-
-    <!-- 第五步 导入 -->
-    <fixed-bottom class="flex full-height"
-      wx:if="{{step==5}}"
-      margin="{{true}}">
-      <slot-message class="flex" slot="header"
-        message="{{message[5]}}">
-      </slot-message>
-
-      <view class="flex wrap main-center" slot="body">
-        <paragraph class="flex wrap"
-          theme="{{theme}}"
-          title="{{'公钥'}}"
-          content="{{crypto.publicKey}}">
-        </paragraph>
-        <paragraph class="flex wrap"
-          theme="{{theme}}"
-          title="{{'私钥'}}"
-          content="{{crypto.privateKey}}"
-          istextarea="{{true}}"
-          placeholder="{{'请输入私钥'}}"
-          bindsetprivatekey="setPrivateKey">
-        </paragraph>
-      </view>
-
-      <view class="flex" slot="footer">
-        <button class="my-button default full margin-right"
-          bindtap="goBackThereStep">
-          <text>上一步</text>
-        </button>
-        <button class="my-button default full margin-right"
-          bindtap="goToFourStepReset">
-          <text>重新生成</text>
-        </button>
-        <button class="my-button full"  
-          bindtap="goToFinishByImport">
-          <text>下一步</text>
-        </button>
-      </view>
-    </fixed-bottom>
-
-    <!-- 第六步 完成 -->
-    <fixed-bottom
-      class="flex full-height"
-      wx:if="{{step==6}}"
-      margin="{{true}}">
-      <slot-message class="flex" slot="header"
-        message="{{message[6]}}">
-      </slot-message>
-      <view class="flex" slot="footer">
-        <button class="my-button default full margin-right"
-          slot="footer"
-          bindtap="goToCryptoIntro">
-          <text>公私钥介绍</text>
-        </button>
-        <button class="my-button full"
-          slot="footer"
-          bindtap="goToIndex">
-          <text>进入密码中心</text>
-        </button>
-      </view>
-    </fixed-bottom>
-  </view>
-</block>
+  <!-- 第六步 完成 -->
+  <fixed-bottom
+    class="flex full-height"
+    wx:if="{{step==6}}"
+    margin="{{true}}">
+    <slot-message class="flex" slot="header"
+      message="{{message[6]}}">
+    </slot-message>
+    <view class="flex" slot="footer">
+      <button class="my-button default full margin-right"
+        slot="footer"
+        bindtap="goToCryptoIntro">
+        <text>公私钥介绍</text>
+      </button>
+      <button class="my-button full"
+        slot="footer"
+        bindtap="goToIndex">
+        <text>进入密码中心</text>
+      </button>
+    </view>
+  </fixed-bottom>
+</view>

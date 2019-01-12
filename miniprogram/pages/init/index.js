@@ -1,5 +1,6 @@
 import Base from '../../utils/Base'
 import Crypto from '../../utils/Crypto'
+import Const from '../../utils/Const'
 import PublicKeys from '../../collections/PublicKeys'
 import PublicKey from '../../models/PublicKey'
 
@@ -10,10 +11,11 @@ Page({
   data: {
     theme: '',
     step: 1,
-    length: 6,
+    length: Const.FACEPASS_LENGTH,
     facepass: '',
     confirmFacepass: '',
     registered: false,
+    error: false,
     crypto: {
       publicKey: '',
       privateKey: '',
@@ -88,8 +90,12 @@ Page({
 
     // 验证数据
     if (confirmFacepass.length !== this.data.length) {
+      this.setData({ error: true })
+      setTimeout(() => this.setData({ error: false }), 2000)
       return base._toast('密码长度不正确')
     } else if (confirmFacepass !== facepass) {
+      this.setData({ error: true })
+      setTimeout(() => this.setData({ error: false }), 2000)
       return base._toast('两次密码不一致')
     } 
     
@@ -160,7 +166,9 @@ Page({
       base._toast('导入成功')
       this.goFinishBefore()
     } else {
+      this.setData({ error: true })
       base._toast('私钥和公钥不匹配\n请确认私钥是否正确')
+      setTimeout(() => this.setData({ error: false }), 2000)
     }
   },
 
