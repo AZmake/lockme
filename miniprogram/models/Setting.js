@@ -1,20 +1,20 @@
 import Model from './Model'
-import Const from '../utils/Const';
+import Const from '../utils/Const'
+import Config from '../utils/Config'
 
 export default class Setting extends Model {
-  constructor(item = {}, app = null) {
-    super(item, app)
+  constructor(item = {}) {
+    super(item)
 
     this._id = item._id || null
-    this.theme = item.theme || this._globalData.defaultTheme
+    this.theme = item.theme || Config.defaultTheme
     this.validTime = item.validTime || Const.VALID_TIME[1].value
-    
-    wx.checkIsSupportSoterAuthentication({
-      success: (res) => {
-        let support = res.supportMode.includes('fingerPrint')
-        this.supportAuthentication = support
-        this.authentication = support ? (item.authentication || false) : false
-      }
+    this.authentication = item.authentication || false
+
+    // 获取 openid
+    wx.cloud.callFunction({
+      name: 'login',
+      complete: res => this.openid = res.result.openid,
     })
   }
 
