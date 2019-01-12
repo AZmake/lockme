@@ -1,0 +1,12 @@
+<view class="container flex theme-{{theme}}">
+  <simple-valid class="flex full-height"
+    theme="{{theme}}"
+    message="{{'请输入应用密码'}}"
+    type="{{'confirmKeyboard'}}"
+    length="{{length}}"
+
+    error="{{error}}"
+    ispassword="{{true}}"
+    bindconfirm="checkedFacepass">
+  </simple-valid>
+</view>
