@@ -12,10 +12,14 @@ export default class Setting extends Model {
     this.authentication = item.authentication || false
 
     // 获取 openid
-    wx.cloud.callFunction({
-      name: 'login',
-      complete: res => this.openid = res.result.openid,
-    })
+    if (this._id) {
+      this.openid = item._openid
+    } else {
+      wx.cloud.callFunction({
+        name: 'login',
+        complete: res => this.openid = res.result.openid,
+      })
+    }
   }
 
   toJson() {
