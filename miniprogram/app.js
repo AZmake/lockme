@@ -10,7 +10,6 @@ App({
     // 页面数据初始化
     this.globalData.crypto = wx.getStorageSync('crypto')
     this.globalData.facepass = wx.getStorageSync('facepass')
-    this.setting = { theme: Config.defaultTheme }
 
     // 判断是否有个人信息，诺无则进行创建
     Settings.init().then(setting => {
@@ -48,6 +47,5 @@ App({
         wx.redirectTo({ url: 'pages/init/index' })
       }
     }
-    console.log(3)
   },
 })
