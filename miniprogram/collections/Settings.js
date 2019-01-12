@@ -1,14 +1,14 @@
 import Collection from './Collection'
-import PublicKey from '../models/PublicKey'
+import Setting from '../models/Setting'
 
-export class PublicKeyCollection extends Collection {
-  constructor() {
-    super('publicKeys')
+export class SettingCollection extends Collection {
+  constructor(app = null) {
+    super('settings', app)
   }
 
   get() {
     return this.getToast().then(res => {
-      this.items = res.data.map(i => new PublicKey(i))
+      this.items = res.data.map(i => new Setting(i))
       return this.items
     })
   }
@@ -36,4 +36,4 @@ export class PublicKeyCollection extends Collection {
   }
 }
 
-export default new PublicKeyCollection;
+export default new SettingCollection;
