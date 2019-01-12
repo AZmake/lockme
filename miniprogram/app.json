@@ -2,7 +2,8 @@
   "pages": [
     "pages/index/index",
     "pages/setting/index",
-    "pages/init/index"
+    "pages/init/index",
+    "pages/valid/index"
   ],
   "window": {
     "navigationBarTitleText": "LockMe",
