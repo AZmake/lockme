@@ -14,7 +14,9 @@ App({
     Settings.init().then(setting => {
       this.setting = setting
     })
+  },
 
+  onShow() {
     // 校验云端的公钥和本地是否一致
     PublicKeys.init().then(publicKey => {
       this.publicKey = publicKey

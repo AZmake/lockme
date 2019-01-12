@@ -47,8 +47,6 @@ Page({
       && app.publicKey.value == app.globalData.crypto.publicKey) {
       this.goToIndex()
     }
-
-    console.log(app.publicKey.value, app.globalData.crypto.publicKey)
   },
 
   /* 第一步相关 */
