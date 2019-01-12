@@ -25,7 +25,7 @@ Page({
 
   onShow() {
     app.pageShow()
-    this.setData({ theme: app.globalData.theme.name })
+    this.setData({ theme: app.setting.theme })
   },
 
   onPullDownRefresh() {
