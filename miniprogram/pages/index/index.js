@@ -1,5 +1,5 @@
-import Safes from '../../collections/Safes'
 import Safe from '../../models/Safe'
+import { Safes } from '../../collections/Safes'
 
 const app = getApp()
 

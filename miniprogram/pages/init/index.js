@@ -1,8 +1,8 @@
 import Base from '../../utils/Base'
-import Crypto from '../../utils/Crypto'
 import Const from '../../utils/Const'
-import PublicKeys from '../../collections/PublicKeys'
+import Crypto from '../../utils/Crypto'
 import PublicKey from '../../models/PublicKey'
+import { PublicKeys } from '../../collections/PublicKeys'
 
 const app = getApp()
 const base = new Base
@@ -127,11 +127,11 @@ Page({
   },
 
   goToFinishByGenerate() {
+    const openid = app.result.openid
     const crypto = this.data.crypto
     const publicKey = new PublicKey({ value: crypto.publicKey })
-    const facepass = this.data.facepass
 
-    PublicKeys.removeAll().then(() => {
+    PublicKeys.removeAll(openid).then(() => {
       return PublicKeys.add(publicKey).then(() => {
         return this.goFinishBefore()
       })
