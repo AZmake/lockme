@@ -28,10 +28,22 @@ let nextKeyboard = [
   ],
 ]
 
-let confirmKeyboard = [
+let confirmAndReturnKeyboard = [
   ...baseKeyboard,
   [
     { text: '返回', value: '返回', type: 'cancel' },
+    { text: '0', value: '0', type: 'button' },
+    { text: '删除', value: '删除', type: 'delete' },
+  ],
+  [
+    { text: '确认', value: '确认', type: 'confirm' }, 
+  ],
+]
+
+let confirmKeyboard = [
+  ...baseKeyboard,
+  [
+    { text: '', value: '', type: '' },
     { text: '0', value: '0', type: 'button' },
     { text: '删除', value: '删除', type: 'delete' },
   ],
@@ -91,6 +103,7 @@ Component({
       baseKeyboard,
       nextKeyboard,
       confirmKeyboard,
+      confirmAndReturnKeyboard,
     },
   },
 

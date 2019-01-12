@@ -7,6 +7,7 @@
   flex-direction: column;
   min-height: 100%;
   max-height: 100%;
+  width: 100%;
 }
 
 /* 主体 */
@@ -74,17 +75,119 @@
   border: 1rpx #4D4C4D solid;
 }
 
+.theme-black .shaking {
+  animation: 2s shaking-black;
+}
 /* 白色主题 */
 .simple-valid.theme-white {
   color: #000;
   background: #F8F8F8;
 }
 
-.theme-white .box.box,
+.theme-white .box,
 .theme-white .button {
   background: #fff;
   border: 1rpx #F8F8F8 solid;
 }
 
+.theme-white .shaking {
+  animation: 2s shaking-white;
+}
 
+@keyframes shaking-white {
+  0% {
+    transform: rotate(0);
+    border: 1rpx #B4373A solid;
+  }
 
+  10% {
+    transform: rotate(1.5deg);
+  }
+
+  20% {
+    transform: rotate(-1.5deg);
+  }
+
+  30% {
+    transform: rotate(1.5deg);
+  }
+
+  40% {
+    transform: rotate(-1.5deg);
+  }
+
+  50% {
+    transform: rotate(1.5deg);
+  }
+
+  60% {
+    transform: rotate(-1.5deg);
+  }
+
+  70% {
+    transform: rotate(1.5deg);
+  }
+
+  80% {
+    transform: rotate(-1.5deg);
+  }
+
+  90% {
+    transform: rotate(1.5deg);
+    border: 1rpx #B4373A solid;
+  }
+
+  100% {
+    transform: rotate(0);
+    border: 1rpx #F8F8F8 solid;
+  }
+}
+
+@keyframes shaking-black {
+  0% {
+    transform: rotate(0);
+    border: 1rpx #B4373A solid;
+  }
+
+  10% {
+    transform: rotate(1.5deg);
+  }
+
+  20% {
+    transform: rotate(-1.5deg);
+  }
+
+  30% {
+    transform: rotate(1.5deg);
+  }
+
+  40% {
+    transform: rotate(-1.5deg);
+  }
+
+  50% {
+    transform: rotate(1.5deg);
+  }
+
+  60% {
+    transform: rotate(-1.5deg);
+  }
+
+  70% {
+    transform: rotate(1.5deg);
+  }
+
+  80% {
+    transform: rotate(-1.5deg);
+  }
+
+  90% {
+    transform: rotate(1.5deg);
+    border: 1rpx #B4373A solid;
+  }
+
+  100% {
+    transform: rotate(0);
+    border: 1rpx #4D4C4D solid;
+  }
+}

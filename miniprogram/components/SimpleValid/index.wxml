@@ -1,8 +1,8 @@
 <fixed-bottom class="simple-valid theme-{{theme}}">
   <!-- header -->
-  <slot-message slot="header" message="{{[message]}}" error="{{error}}">
+  <slot-message class="flex" slot="header" message="{{[message]}}" error="{{error}}">
     <view class="boxs">
-      <input class="box"
+      <input class="box {{error ? 'shaking' : ''}}"
         wx:for="{{length}}"
         wx:key="{{index}}"
 
