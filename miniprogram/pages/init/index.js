@@ -196,11 +196,11 @@ Page({
   },
 
   goToCryptoIntro() {
-    wx.navigateTo({ url: '/page/setting/index?from=init' })
+    wx.navigateTo({ url: 'page/setting/index?from=init' })
   },
 
   goToIndex() {
-    wx.switchTab({ url: '/pages/index/index' })
+    wx.switchTab({ url: 'pages/index/index' })
   },
   /* 最后一步相关 */ 
 })
