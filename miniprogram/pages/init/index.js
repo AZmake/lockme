@@ -16,6 +16,7 @@ Page({
     confirmFacepass: '',
     registered: false,
     error: false,
+    publicKey: {},
     crypto: {
       publicKey: '',
       privateKey: '',
@@ -37,22 +38,19 @@ Page({
     }
 
     this.setData({
-      theme: app.globalData.theme.name,
+      theme: app.setting.theme,
     })
 
     // 判断是否已经设置过私钥了
-    PublicKeys.getOne().then(res => {
-      if (res == null) {
-        this.generatePrivateKey()
-      } else {
-        this.setData({
-          registered: true,
-          crypto: {
-            publicKey: res.value,
-            privateKey: '',
-          }
-        })
-      }
+    PublicKeys.init().then(item => {
+      this.setData({
+        publicKey: item,
+        registered: !!item.value,
+        crypto: {
+          publicKey: item.value,
+          privateKey: '',
+        }
+      })
     })
   },
 
@@ -127,15 +125,7 @@ Page({
   },
 
   goToFinishByGenerate() {
-    const openid = app.result.openid
-    const crypto = this.data.crypto
-    const publicKey = new PublicKey({ value: crypto.publicKey })
-
-    PublicKeys.removeAll(openid).then(() => {
-      return PublicKeys.add(publicKey).then(() => {
-        return this.goFinishBefore()
-      })
-    })
+    this.goFinishBefore()
   },
   /* 第四步相关 */
 
@@ -189,12 +179,21 @@ Page({
 
   /* 最后一步相关 */ 
   goFinishBefore() {
+    // 初始化数据
     const crypto = this.data.crypto
     const facepass = this.data.facepass
+    let publicKey = this.data.publicKey 
 
+    // 更新公钥
+    publicKey.value = crypto.publicKey
+    PublicKeys.edit(publicKey)
+
+
+    // 设置全局变量
     app.globalData.crypto = crypto
     app.globalData.facepass = facepass
 
+    // 写入本地数据
     wx.setStorageSync('crypto', crypto)
     wx.setStorageSync('facepass', facepass)
     this.setData({ step: 6 })

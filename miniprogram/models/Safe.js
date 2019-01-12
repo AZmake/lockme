@@ -31,11 +31,13 @@ export default class Safe extends Model {
   }
   
   decrypt(password) {
-    return password ? Crypto.sm2.doDecrypt(password, this.crypto.privateKey) : ''
+    const crypto = this.crypto
+    return crypto && password ? Crypto.sm2.doDecrypt(password, this.crypto.privateKey) : ''
   }
 
   encrypt(password) {
-    return Crypto.sm2.doEncrypt(password, this.crypto.publicKey) 
+    const crypto = this.crypto
+    return crypto && password ? Crypto.sm2.doEncrypt(password, this.crypto.publicKey) : ''
   }
 
   toJson() {
