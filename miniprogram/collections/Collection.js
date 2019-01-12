@@ -1,11 +1,23 @@
 import Base from '../utils/Base'
+import Config from '../utils/Config'
 
 export default class Collection extends Base {
   constructor(name) {
     super()
-
-    this.collectionName = this._cloud.collections[name]    
+    
     this.items = []
+    this.collectionName = Config.cloud.collections[name]
+
+    if (!wx.cloud) {
+      console.error('请使用 2.2.3 或以上的基础库以使用云能力')
+    }
+
+    wx.cloud.init({
+      env: Config.cloud.env,
+      traceUser: true,
+    })
+
+    this._db = wx.cloud.database()
   }
 
   collection() {
@@ -78,7 +90,7 @@ export default class Collection extends Base {
       name: 'removeAll',
       data: {
         name: this.collectionName,
-        openid: this._globalData.openid,
+        openid: getApp().globalData.openid,
       }
     })
   }
