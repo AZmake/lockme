@@ -1,6 +1,6 @@
+import Model from './Model'
 import Const from '../utils/Const'
 import Crypto from '../utils/Crypto'
-import Model from './Model'
 
 const rules = [
   { key: 'lowercase', reg: Const.REG_LOWERCASE, value: Const.LOWERCASE },
@@ -23,6 +23,7 @@ export default class Safe extends Model {
     this.password = this.decrypt(this.encryptedPassword)
     this.length = this.password.length ? this.password.length : 10;
     this.elements = rules.map(i => this.password.match(i.reg) || !this.password ? i.key : '')
+    this.crypto = wx.getStorageSync('crypto')
 
     if (!this._id) {
       this.generate()
@@ -30,15 +31,12 @@ export default class Safe extends Model {
   }
   
   decrypt(password) {
-    const privateKey = this._globalData.crypto.privateKey
-    return password
-      ? Crypto.sm2.doDecrypt(password, privateKey)
-      : ''
+    return password ? Crypto.sm2.doDecrypt(password, this.crypto.privateKey) : ''
   }
 
   encrypt(password) {
-    const publicKey = this._globalData.crypto.publicKey
-    return Crypto.sm2.doEncrypt(password, publicKey) 
+    const crypto = wx.getStorageSync('crypto')
+    return Crypto.sm2.doEncrypt(password, this.crypto.publicKey) 
   }
 
   toJson() {
