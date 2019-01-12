@@ -1,11 +1,7 @@
 export default class {
   constructor() {
-    this._app = getApp()
-    this._globalData = this._app.globalData
-    this._cloud = this._globalData.cloud
     this._hasToast = false
     this._hasLoading = false
-    this._db = wx.cloud.database()
   }
 
   _toast(i, res) {
