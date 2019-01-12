@@ -1,8 +1,14 @@
 <view class="container theme-{{theme}}">
   <view class="section">
     <view class="section__title">普通选择器</view>
-    <picker bindchange="changeTheme" value="{{indexTheme}}" range="{{themes}}">
-      <view class="picker">皮肤 {{themes[indexTheme]}}</view>
+    <picker bindchange="changeTheme"
+      value="{{themesIndex}}"
+      range="{{themes}}"
+      range-key="text"
+      >
+      <view class="picker">
+        皮肤 {{themes[themesIndex].text}}
+      </view>
     </picker>
   </view>
 </view>

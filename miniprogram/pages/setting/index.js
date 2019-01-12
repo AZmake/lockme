@@ -1,30 +1,43 @@
+import Const from "../../utils/Const";
+
+
 const app = getApp()
 
 Page({
   data: {
     theme: '',
-    indexTheme: 0,
-    themes: [],
+    themesIndex: 0,
+    themes: Const.THEMES,
   },
 
   onLoad() {
-    app.pageShow()
-    this.setData({
-      theme: app.globalData.theme.name,
-      themes: Object.keys(app.globalData.themes),
-    })
   },
 
   onShow() {
     app.pageShow()
-    this.setData({ theme: app.globalData.theme.name })
+    this.setData({ theme: app.setting.theme })
+    this.setThemesIndex()
+  },
+
+  setThemesIndex() {
+    const theme = this.data.theme
+    const themes = this.data.themes
+
+    themes.forEach((i, k) => {
+      if (i.value == theme) {
+        this.setData({
+          themesIndex: k,
+        })
+      }
+    })
   },
 
   changeTheme(e) {
-    let indexTheme = e.detail.value
-    let theme = this.data.themes[indexTheme]
+    let themesIndex = e.detail.value
+    const themes = this.data.themes
+    const theme  = themes[themesIndex].value
 
-    app.changeTheme(theme)
-    this.setData({ theme, indexTheme })
+    app.setting.changeTheme(theme)
+    this.setData({ theme, themesIndex })
   }
 })
