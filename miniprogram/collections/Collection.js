@@ -85,12 +85,12 @@ export default class Collection extends Base {
       })
   }
 
-  removeAll() {
+  removeAll(openid) {
     return wx.cloud.callFunction({
       name: 'removeAll',
       data: {
+        openid,
         name: this.collectionName,
-        openid: getApp().globalData.openid,
       }
     })
   }
