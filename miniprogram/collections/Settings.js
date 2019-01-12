@@ -1,9 +1,9 @@
 import Collection from './Collection'
 import Setting from '../models/Setting'
 
-export class SettingCollection extends Collection {
-  constructor(app = null) {
-    super('settings', app)
+class SettingCollection extends Collection {
+  constructor() {
+    super('settings')
   }
 
   get() {
@@ -36,4 +36,5 @@ export class SettingCollection extends Collection {
   }
 }
 
-export default new SettingCollection;
+export let Settings =  new SettingCollection
+export default SettingCollection

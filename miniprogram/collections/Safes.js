@@ -1,7 +1,7 @@
 import Collection from './Collection'
 import Safe from '../models/Safe'
 
-export class SafeCollection extends Collection {
+class SafeCollection extends Collection {
   constructor() {
     super('safes')
   }
@@ -77,4 +77,5 @@ export class SafeCollection extends Collection {
   }
 }
 
-export default new SafeCollection;
+export default SafeCollection
+export let Safes = new SafeCollection

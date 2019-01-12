@@ -1,7 +1,7 @@
 import Collection from './Collection'
 import PublicKey from '../models/PublicKey'
 
-export class PublicKeyCollection extends Collection {
+class PublicKeyCollection extends Collection {
   constructor() {
     super('publicKeys')
   }
@@ -36,4 +36,5 @@ export class PublicKeyCollection extends Collection {
   }
 }
 
-export default new PublicKeyCollection;
+export let PublicKeys = new PublicKeyCollection
+export default PublicKeyCollection
