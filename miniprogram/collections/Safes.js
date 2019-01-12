@@ -30,7 +30,9 @@ class SafeCollection extends Collection {
   }
 
   remove(item) {
+    let items = this.items.filter(i => i._id != item._id)
     return this.removeToast(item)
+      .then(() => this.items = items)
   }
 
   find(_id) {

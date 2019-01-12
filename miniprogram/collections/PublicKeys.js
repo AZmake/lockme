@@ -24,14 +24,15 @@ class PublicKeyCollection extends Collection {
   }
 
   add(item) {
-    return this.addToast(item).then(res => {
-      item._id = res._id
-      return item
-    })
+    return this.addToast(item, '', '', true)
+      .then(res => {
+        item._id = res._id
+        return item
+      })
   }
 
   edit(item) {
-    return this.editToast(item)
+    return this.editToast(item, '', '', true)
   }
 
   remove(item) {

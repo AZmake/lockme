@@ -24,7 +24,7 @@ class SettingCollection extends Collection {
   }
 
   add(item) {
-    return this.addToast(item).then(res => {
+    return this.addToast(item, '', '', true).then(res => {
       item._id = res._id
       return item
     })

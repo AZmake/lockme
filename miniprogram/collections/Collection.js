@@ -52,46 +52,42 @@ export default class Collection extends Base {
     return this.items
   }
 
-  getToast() {
-    this._loading()
+  getToast(item = {}, success = "加载数据", error = "加载失败", close = false) {
+    if (!close) {
+      this._loading(success)
+    }
 
     return this.collection().orderBy('created_at', 'desc').get()
-      .then(res => this._closeToast(res))
-      .catch(error => this._toast('加载失败', error))
+      .then(res => close ? res : this._closeToast(res))
+      .catch(err => close ? error : this._toast(error, err))
   }
 
-  addToast(item) {
+  addToast(item, success = "创建成功", error = "创建失败", close = false) {
     let data = item.toJson()
     return this.collection().add({ data })
-      .then(res => this._toast('创建成功', res))
-      .catch(error => this._toast('创建失败', error))
+      .then(res => close ? res : this._toast(success, res))
+      .catch(err => close ? error : this._toast(error, err))
   }
 
-  editToast(item) {
+  editToast(item, success = "编辑成功", error = "编辑失败", close = false) {
     let data = item.toJson()
     
     return this.collection().doc(item._id).update({ data })
-      .then(res => this._toast('编辑成功', res))
-      .catch(error => this._toast('编辑失败', error))
+      .then(res => close ? res : this._toast(success, res))
+      .catch(err => close ? error : this._toast(error, err))
   }
 
-  removeToast(item) {
-    let items = this.items.filter(i => i._id != item._id)
+  removeToast(item, success = "删除成功", error = "删除失败", close = false) {
+    
     return this.collection().doc(item._id).remove()
-      .then(() => this._toast('删除成功'))
-      .then(() => this.items = items)
-      .catch(error => {
-        this._toast('删除失败', error)
-      })
+      .then(res => close ? res : this._toast(success, res))
+      .catch(err => close ? error : this._toast(error, err))
   }
 
   removeAll(openid) {
     return wx.cloud.callFunction({
       name: 'removeAll',
-      data: {
-        openid,
-        name: this.collectionName,
-      }
+      data: { openid, name: this.collectionName }
     })
   }
 }
