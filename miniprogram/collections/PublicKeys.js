@@ -6,29 +6,32 @@ class PublicKeyCollection extends Collection {
     super('publicKeys')
   }
 
-  get() {
-    return this.getToast().then(res => {
-      this.items = res.data.map(i => new PublicKey(i))
-      return this.items
+  init() {
+    return PublicKeys.get().then(item => {
+      return new Promise(resolve => {
+        item
+          ? resolve(item)
+          : this.add(new PublicKey).then(resolve)
+      })
     })
   }
 
-  getOne() {
-    return this.get().then(res => res.length > 0 ? res[0] : null)
+  get() {
+    return this.getToast().then(res => {
+      this.items = res.data.map(i => new PublicKey(i))
+      return this.items.length > 0 ? this.items[0] : null
+    })
   }
 
   add(item) {
     return this.addToast(item).then(res => {
       item._id = res._id
-      return this.setItems([item, ...this.items]).uniqueById()
+      return item
     })
   }
 
   edit(item) {
     return this.editToast(item)
-      .then(() => {
-        return this.setItems([item, ...this.items]).uniqueById()
-      })
   }
 
   remove(item) {

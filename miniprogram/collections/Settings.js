@@ -7,10 +7,10 @@ class SettingCollection extends Collection {
   }
 
   init() {
-    return Settings.get().then(setting => {
+    return Settings.get().then(item => {
       return new Promise(resolve => {
-        setting
-          ? resolve(setting)
+        item
+          ? resolve(item)
           : this.add(new Setting).then(resolve)
       })
     })
