@@ -1,4 +1,5 @@
 import { Settings } from './collections/Settings'
+import { PublicKeys } from './collections/PublicKeys'
 
 App({
   onLaunch() {
@@ -13,6 +14,12 @@ App({
     Settings.init().then(setting => {
       this.setting = setting
     })
+
+    // 校验云端的公钥和本地是否一致
+    PublicKeys.init().then(publicKey => {
+      this.publicKey = publicKey
+      this.isInit()
+    })
   },
 
   pageLoad() {
@@ -24,7 +31,13 @@ App({
   },
 
   isInit() {
-    if (!this.globalData.crypto || !this.globalData.facepass) {
+    const value = this.publicKey.value
+    const crypto = this.globalData.crypto
+    const facepass = this.globalData.facepass
+    
+    // 验证是否配置
+    // 校验云端的公钥和本地是否一致
+    if ((!crypto || !facepass) || (!value && value != crypto.publicKey )) {
       wx.redirectTo({ url: '/pages/init/index' })
     }
   },

@@ -33,25 +33,22 @@ Page({
   },
 
   onLoad() {
-    if (app.globalData.crypto && app.globalData.facepass) {
+    // 判断是否已经设置过私钥了
+    this.setData({
+      theme: app.setting.theme,
+      publicKey: app.publicKey,
+      registered: !!app.publicKey.value,
+      crypto: { publicKey: app.publicKey.value, privateKey: '' },
+    })
+
+    // 验证是否已经设置过私钥
+    if (app.globalData.crypto
+      && app.globalData.facepass
+      && app.publicKey.value == app.globalData.crypto.publicKey) {
       this.goToIndex()
     }
 
-    this.setData({
-      theme: app.setting.theme,
-    })
-
-    // 判断是否已经设置过私钥了
-    PublicKeys.init().then(item => {
-      this.setData({
-        publicKey: item,
-        registered: !!item.value,
-        crypto: {
-          publicKey: item.value,
-          privateKey: '',
-        }
-      })
-    })
+    console.log(app.publicKey.value, app.globalData.crypto.publicKey)
   },
 
   /* 第一步相关 */
@@ -182,11 +179,12 @@ Page({
     // 初始化数据
     const crypto = this.data.crypto
     const facepass = this.data.facepass
-    let publicKey = this.data.publicKey 
+    let publicKey = app.publicKey 
 
     // 更新公钥
     publicKey.value = crypto.publicKey
     PublicKeys.edit(publicKey)
+    app.publicKey = publicKey
 
 
     // 设置全局变量
