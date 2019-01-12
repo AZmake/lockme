@@ -6,6 +6,16 @@ class SettingCollection extends Collection {
     super('settings')
   }
 
+  init() {
+    return Settings.get().then(setting => {
+      return new Promise(resolve => {
+        setting
+          ? resolve(setting)
+          : this.add(new Setting).then(resolve)
+      })
+    })
+  }
+
   get() {
     return this.getToast().then(res => {
       this.items = res.data.map(i => new Setting(i))

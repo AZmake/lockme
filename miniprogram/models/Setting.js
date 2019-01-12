@@ -10,7 +10,7 @@ export default class Setting extends Model {
     this.theme = item.theme || Config.defaultTheme
     this.validTime = item.validTime || Const.VALID_TIME[1].value
     this.authentication = item.authentication || false
-
+    
     // 获取 openid
     if (this._id) {
       this.openid = item._openid
@@ -20,6 +20,17 @@ export default class Setting extends Model {
         complete: res => this.openid = res.result.openid,
       })
     }
+
+    // 挂载主题设置
+    this.changeTheme()
+  }
+
+  changeTheme = (name) => {
+    this.theme = name || this.theme
+    let theme = Config.themes[this.theme]
+    theme.items.forEach(i => wx.setTabBarItem(i))
+    wx.setTabBarStyle(theme.tabBarStyle)
+    wx.setNavigationBarColor(theme.navigationBar)
   }
 
   toJson() {
