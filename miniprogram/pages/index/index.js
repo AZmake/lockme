@@ -102,7 +102,7 @@ Page({
       return true
     }
 
-    wx.navigateTo({ url: 'pages/valid/index' })
+    wx.navigateTo({ url: '/pages/valid/index' })
 
     return false
   },

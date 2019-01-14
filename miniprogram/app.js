@@ -45,7 +45,7 @@ App({
       // 验证是否配置
       // 校验云端的公钥和本地是否一致
       if ((!crypto || !facepass) || (!value && value != crypto.publicKey )) {
-        wx.redirectTo({ url: 'pages/init/index' })
+        wx.redirectTo({ url: '/pages/init/index' })
       }
     }
   },
