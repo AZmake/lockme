@@ -10,6 +10,7 @@ App({
     // 页面数据初始化
     this.globalData.crypto = wx.getStorageSync('crypto')
     this.globalData.facepass = wx.getStorageSync('facepass')
+    this.changeTheme(wx.getStorageSync('themeName') || Config.defaultTheme)
 
     // 判断是否有个人信息，诺无则进行创建
     Settings.init().then(setting => {
@@ -30,7 +31,7 @@ App({
   },
 
   pageShow() {
-    this.setting.changeTheme()
+    this.changeTheme()
   },
 
   isInit() {
@@ -48,4 +49,13 @@ App({
       }
     }
   },
+
+  changeTheme(name) {
+    name = name || wx.getStorageSync('themeName') || Config.defaultTheme
+    this.globalData.theme = name
+    let theme = Config.themes[name]
+    theme.items.forEach(i => wx.setTabBarItem(i))
+    wx.setTabBarStyle(theme.tabBarStyle)
+    wx.setNavigationBarColor(theme.navigationBar)
+  }
 })

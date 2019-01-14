@@ -35,7 +35,7 @@ Page({
   onLoad() {
     // 判断是否已经设置过私钥了
     this.setData({
-      theme: app.setting.theme,
+      theme: app.globalData.theme,
       publicKey: app.publicKey,
       registered: !!app.publicKey.value,
       crypto: { publicKey: app.publicKey.value, privateKey: '' },

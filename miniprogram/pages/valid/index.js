@@ -17,7 +17,7 @@ Page({
 
   onShow() {
     app.pageShow()
-    this.setData({ theme: app.setting.theme })
+    this.setData({ theme: app.globalData.theme })
   },
 
   checkedFacepass(e) {
