@@ -1,0 +1,42 @@
+/* 块样式 */
+.theme-white .panel {
+  background: #fff;
+}
+
+.theme-black .panel {
+  background: #4D4C4D;
+}
+
+.panel {
+  border-radius: 10rpx;
+}
+
+.panel .title {
+  height: 80rpx;
+}
+
+/* 块样式 */
+
+/* 行样式 */
+.line {
+  height: 80rpx;
+}
+
+.theme-black .line {
+  border-top: 1px #353435 solid;
+}
+
+.theme-white .line {
+  border-top: 1px #F8F8F8 solid;
+}
+
+.line .line-label {
+  flex-grow: 1;
+  text-align: left;
+}
+
+.line .line-content {
+  flex-grow: 0;
+  text-align: right;
+}
+/* 行样式 */

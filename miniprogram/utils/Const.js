@@ -12,7 +12,7 @@ export const REG_SPECIAL   = /[-.~!@#$%^&*()_:<>,?]/
 export const FACEPASS_LENGTH  = 6
 
 // 应用密码检测间隔时间
-export const VALID_TIME = [
+export const VALID_TIMES = [
   { value: 30 * 1000, text:'30秒' },
   { value: 1 * 60 * 1000, text: '1分钟' },
   { value: 3 * 60 * 1000, text: '3分钟' },
@@ -36,7 +36,7 @@ export default {
   REG_UPPERCASE,
   REG_NUMBER,
   REG_SPECIAL,
-  VALID_TIME,
+  VALID_TIMES,
   THEMES,
   FACEPASS_LENGTH,
 }

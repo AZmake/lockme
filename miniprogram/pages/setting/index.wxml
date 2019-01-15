@@ -1,13 +1,35 @@
 <view class="container theme-{{theme}}">
-  <view class="section">
-    <view class="section__title">普通选择器</view>
-    <picker bindchange="changeTheme"
+  <view class="flex wrap panel margin-top">
+    <view class="flex title cross-center">
+      <text class="margin-left">基础设置</text>
+    </view>
+    <picker style="width: 100%;"
+      bindchange="changeTheme"
       value="{{themesIndex}}"
       range="{{themes}}"
-      range-key="text"
-      >
-      <view class="picker">
-        皮肤 {{themes[themesIndex].text}}
+      range-key="text">
+      <view class="flex line cross-center">
+        <view class="line-label">
+          <text class="margin-left">皮肤</text>
+        </view>
+        <view class="line-content">
+          <text class="margin-right">{{themes[themesIndex].text}}</text>
+        </view>
+      </view>
+    </picker>
+
+    <picker style="width: 100%;"
+      bindchange="changeTheme"
+      value="{{validIndex}}"
+      range="{{validTimes}}"
+      range-key="text">
+      <view class="flex line cross-center">
+        <view class="line-label">
+          <text class="margin-left">锁定时间</text>
+        </view>
+        <view class="line-content">
+          <text class="margin-right">{{validTimes[validIndex].text}}</text>
+        </view>
       </view>
     </picker>
   </view>

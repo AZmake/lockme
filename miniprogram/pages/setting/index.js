@@ -8,6 +8,9 @@ Page({
     theme: '',
     themesIndex: 0,
     themes: Const.THEMES,
+    validTime: 0,
+    validIndex: 0,
+    validTimes: Const.VALID_TIMES,
   },
 
   onLoad() {
@@ -37,7 +40,7 @@ Page({
     const themes = this.data.themes
     const theme  = themes[themesIndex].value
 
-    app.setting.changeTheme(theme)
+    app.changeTheme(theme)
     this.setData({ theme, themesIndex })
   }
 })

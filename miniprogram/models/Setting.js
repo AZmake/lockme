@@ -1,6 +1,5 @@
 import Model from './Model'
 import Const from '../utils/Const'
-import Config from '../utils/Config'
 
 export default class Setting extends Model {
   constructor(item = {}) {
