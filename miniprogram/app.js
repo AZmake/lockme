@@ -53,6 +53,8 @@ App({
   changeTheme(name) {
     name = name || wx.getStorageSync('themeName') || Config.defaultTheme
     this.globalData.theme = name
+    wx.setStorageSync('themeName', name)
+
     let theme = Config.themes[name]
     theme.items.forEach(i => wx.setTabBarItem(i))
     wx.setTabBarStyle(theme.tabBarStyle)
