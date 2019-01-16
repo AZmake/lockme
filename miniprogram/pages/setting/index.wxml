@@ -1,7 +1,7 @@
 <view class="container theme-{{theme}}">
   <view class="flex wrap panel margin-top">
     <view class="flex title cross-center">
-      <text class="margin-left">基础设置</text>
+      <text class="margin-left">设置</text>
     </view>
     <picker style="width: 100%;"
       bindchange="changeTheme"
@@ -19,8 +19,8 @@
     </picker>
 
     <picker style="width: 100%;"
-      bindchange="changeTheme"
-      value="{{validIndex}}"
+      bindchange="changeValidTime"
+      value="{{validTimesIndex}}"
       range="{{validTimes}}"
       range-key="text">
       <view class="flex line cross-center">
@@ -28,9 +28,61 @@
           <text class="margin-left">锁定时间</text>
         </view>
         <view class="line-content">
-          <text class="margin-right">{{validTimes[validIndex].text}}</text>
+          <text class="margin-right">{{validTimes[validTimesIndex].text}}</text>
         </view>
       </view>
     </picker>
+  </view>
+
+  <view class="flex wrap panel margin-top">
+    <view class="flex title cross-center">
+      <text class="margin-left">安全</text>
+    </view>
+    <view class="flex line cross-center">
+      <view class="line-label">
+        <text class="margin-left">数据备份</text>
+      </view>
+      <view class="line-content">
+        <text class="iconfont icon-enter margin-right"></text>
+      </view>
+    </view>
+    <view class="flex line cross-center">
+      <view class="line-label">
+        <text class="margin-left">数据导入</text>
+      </view>
+      <view class="line-content">
+        <text class="iconfont icon-enter margin-right"></text>
+      </view>
+    </view>
+    <view class="flex line cross-center">
+      <view class="line-label">
+        <text class="margin-left">私钥更改</text>
+      </view>
+      <view class="line-content">
+        <text class="iconfont icon-enter margin-right"></text>
+      </view>
+    </view>
+  </view>
+
+  <view class="flex wrap panel margin-top">
+    <view class="flex title cross-center">
+      <text class="margin-left">其他</text>
+    </view>
+    <view class="flex line cross-center">
+      <view class="line-label">
+        <text class="margin-left">什么是公私钥</text>
+      </view>
+      <view class="line-content">
+        <text class="iconfont icon-enter margin-right"></text>
+      </view>
+    </view>
+    <view class="flex line cross-center">
+      <view class="line-label">
+        <text class="margin-left">关于我们</text>
+      </view>
+      <view class="line-content">
+        <text class="iconfont icon-enter margin-right"></text>
+      </view>
+    </view>
   </view>
 </view>

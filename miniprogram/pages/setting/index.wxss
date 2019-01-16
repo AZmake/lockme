@@ -39,4 +39,8 @@
   flex-grow: 0;
   text-align: right;
 }
+
+.iconfont {
+  font-size: 32rpx;
+}
 /* 行样式 */
