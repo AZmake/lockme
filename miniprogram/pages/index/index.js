@@ -98,7 +98,7 @@ Page({
     const validEndAt = parseInt(wx.getStorageSync('validEndAt') || 0)
     const now = (new Date).getTime()
 
-    if (now < validEndAt) {
+    if (now < validEndAt || app.setting.validTime === 0) {
       return true
     }
 
