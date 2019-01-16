@@ -31,7 +31,7 @@ class SettingCollection extends Collection {
   }
 
   edit(item) {
-    return this.editToast(item)
+    return this.editToast(item, "设置成功", "设置失败")
   }
 
   remove(item) {
