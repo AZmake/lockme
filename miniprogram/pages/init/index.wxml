@@ -104,7 +104,7 @@
         content="{{crypto.privateKey}}"
         istextarea="{{true}}"
         placeholder="{{'请输入私钥'}}"
-        bindsetprivatekey="setPrivateKey">
+        bindsetvalue="setPrivateKey">
       </paragraph>
     </view>
 

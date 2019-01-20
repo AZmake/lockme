@@ -39,7 +39,7 @@ Component({
     setValue(e) {
       const value = e.detail.value
       this.setData({value: value })
-      this.triggerEvent(`setprivatekey`, { value })
+      this.triggerEvent(`setvalue`, { value })
     },
     tap() {
       this.triggerEvent(`click`)
