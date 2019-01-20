@@ -26,10 +26,6 @@ App({
     })
   },
 
-  pageLoad() {
-    this.isInit()
-  },
-
   pageShow() {
     this.changeTheme()
   },
