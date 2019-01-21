@@ -11,13 +11,9 @@ Page({
     length: Const.FACEPASS_LENGTH,
   },
 
-  onLoad() { 
-    app.pageLoad()
-  },
-
   onShow() {
-    app.pageShow()
     this.setData({ theme: app.globalData.theme })
+    app.pageShow()
   },
 
   checkedFacepass(e) {

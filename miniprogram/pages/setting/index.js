@@ -1,5 +1,6 @@
 import Base from "../../utils/Base"
 import Const from "../../utils/Const"
+import { Safes } from '../../collections/Safes'
 import { Settings } from '../../collections/Settings'
 
 const app = getApp()
@@ -17,18 +18,32 @@ Page({
   },
 
   onLoad() {
+    this.setThemesIndex()
+
+    if (app.setting) {
+      this.setData({ validTime: app.setting.validTime })
+      this.setValidTimesIndex()
+    } else {
+      Settings.init().then(res => {
+        this.setData({ validTime: res.validTime })
+        this.setValidTimesIndex()
+      })
+    }
   },
 
   onShow() {
+    this.setData({ theme: app.globalData.theme })
     app.pageShow()
+  },
 
-    this.setData({
-      theme: app.globalData.theme,
-      validTime: app.setting.validTime
+  exportSafes() {
+    Safes.exportData()
+  },
+
+  importSafes() {
+    wx.navigateTo({
+      url: '/pages/import-safes/index'
     })
-
-    this.setThemesIndex()
-    this.setValidTimesIndex()
   },
 
   setValidTimesIndex() {

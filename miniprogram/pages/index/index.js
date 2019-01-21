@@ -1,7 +1,9 @@
 import Safe from '../../models/Safe'
+import Base from '../../utils/Base'
 import { Safes } from '../../collections/Safes'
 
 const app = getApp()
+const base = new Base
 
 Page({
   data: {
@@ -19,13 +21,12 @@ Page({
   },
 
   onLoad() { 
-    app.pageLoad()
     this.getSafes()
   },
 
   onShow() {
-    app.pageShow()
     this.setData({ theme: app.globalData.theme })
+    app.pageShow()
   },
 
   onPullDownRefresh() {
@@ -94,29 +95,17 @@ Page({
     Safes.search(keyword).then(safes => this.setData({ safes }))
   },
 
-  checkValidEndAt() {
-    const validEndAt = parseInt(wx.getStorageSync('validEndAt') || 0)
-    const now = (new Date).getTime()
-
-    if (now < validEndAt || app.setting.validTime === 0) {
-      return true
-    }
-
-    wx.navigateTo({ url: '/pages/valid/index' })
-
-    return false
-  },
-
   toggleSafe(e) {
+    console.log(app.setting)
     const safe = e.detail.safe
-    if(this.checkValidEndAt()) {
+    if(base._checkValidEndAt(app.setting.validTime)) {
       Safes.toggle(safe).then(safes => this.setData({ safes }))
     }
   },
 
   copySafe(e) {
     const safe = e.detail.safe
-    if(this.checkValidEndAt()) {
+    if(base._checkValidEndAt(app.setting.validTime)) {
       wx.setClipboardData({
         data: safe.password,
       })

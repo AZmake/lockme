@@ -41,4 +41,17 @@ export default class {
     }
     return res ? res : ''
   }
+
+  _checkValidEndAt(validTime) {
+    const validEndAt = parseInt(wx.getStorageSync('validEndAt') || 0)
+    const now = (new Date).getTime()
+
+    if (now < validEndAt || validTime === 0) {
+      return true
+    }
+
+    wx.navigateTo({ url: '/pages/valid/index' })
+
+    return false
+  }
 }

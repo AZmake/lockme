@@ -38,7 +38,7 @@
     <view class="flex title cross-center">
       <text class="margin-left">安全</text>
     </view>
-    <view class="flex line cross-center">
+    <view class="flex line cross-center" bindtap="exportSafes">
       <view class="line-label">
         <text class="margin-left">数据备份</text>
       </view>
@@ -46,7 +46,7 @@
         <text class="iconfont icon-enter margin-right"></text>
       </view>
     </view>
-    <view class="flex line cross-center">
+    <view class="flex line cross-center" bindtap="importSafes">
       <view class="line-label">
         <text class="margin-left">数据导入</text>
       </view>
