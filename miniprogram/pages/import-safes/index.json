@@ -1,0 +1,8 @@
+{
+  "usingComponents": {
+    "simple-valid": "../../components/SimpleValid",
+    "slot-message": "../../components/SlotMessage",
+    "fixed-bottom": "../../components/FixedBottom",
+    "paragraph": "../../components/Paragraph"
+  }
+}
