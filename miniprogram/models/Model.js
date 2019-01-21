@@ -19,8 +19,8 @@ export default class Model extends Base {
   toJson(obj) {
     return {
       ...obj,
-      updated_at: this._db.serverDate(),
-      created_at: this._id ? this.created_at : this._db.serverDate(),
+      updated_at: (new Date).getTime(),
+      created_at: this._id ? this.created_at : (new Date).getTime(),
     }
   }
 }

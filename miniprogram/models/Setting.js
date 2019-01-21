@@ -6,7 +6,7 @@ export default class Setting extends Model {
     super(item)
 
     this._id = item._id || null
-    this.validTime = parseInt(item.validTime || Const.VALID_TIME[1].value)
+    this.validTime = this._id ? parseInt(item.validTime) : Const.VALID_TIMES[1].value
     this.authentication = item.authentication || false
     
     // 获取 openid

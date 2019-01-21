@@ -21,11 +21,11 @@ export default class Safe extends Model {
     this.publicKey = item.publicKey || ''
     this.crypto = wx.getStorageSync('crypto')
     this.encryptedPassword = item.encryptedPassword || null
-    this.password = this.decrypt(this.encryptedPassword)
+    this.password = item.password || this.decrypt(this.encryptedPassword)
     this.length = this.password.length ? this.password.length : 10;
     this.elements = rules.map(i => this.password.match(i.reg) || !this.password ? i.key : '')
     
-    if (!this._id) {
+    if (!this._id && this.password == '') {
       this.generate()
     }
   }
@@ -48,6 +48,15 @@ export default class Safe extends Model {
       publicKey: this.publicKey,
       encryptedPassword: this.encrypt(this.password),
     })
+  }
+
+  toData() {
+    return {
+      name: this.name,
+      note: this.note,
+      account: this.account,
+      password: this.password,
+    }
   }
 
   generate() {

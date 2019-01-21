@@ -13,8 +13,8 @@ class SafeCollection extends Collection {
     })
   }
 
-  add(item) {
-    return this.addToast(item).then(res => {
+  add(item, success, error, close) {
+    return this.addToast(item, success, error, close).then(res => {
       item._id = res._id
       item.show = true
       return this.setItems([item, ...this.items]).uniqueById()
@@ -76,6 +76,66 @@ class SafeCollection extends Collection {
     }
 
     return true
+  }
+
+  exportData() {
+    this.get().then(items => {
+      let data = JSON.stringify(items.map(item => item.toData()))
+      wx.setClipboardData({ data })
+    })
+  }
+
+  importData(data) {
+    return new Promise((resolve, reject) => {
+      let items
+
+      try {
+        items = JSON.parse(data)
+      } catch (e) {
+        reject(new Error('导入的数据有误'));
+      }
+
+      // 简单的数组检查
+      if (!Array.isArray(items)) {
+        reject(new Error('导入的数据不是数组'));
+      } 
+
+      // 简单的数据检查
+      items.forEach(item => {
+        if (item.name === '') {
+          reject(new Error('导入的数据名称不能为空'))
+        }
+    
+        if (item.password === '') {
+          reject(new Error('导入的数据密码不能为空'))
+        }
+      })
+
+      // 创建数据
+      this.get().then(oldItems => {
+        items.forEach(item => {
+          item = new Safe(item)
+          
+          let exist = oldItems.filter(i => { 
+            return i.password == item.password
+              && i.name == i.name
+          }).length != 0
+
+          let hasSomeName = oldItems.filter(i => {
+            return i.name === item.name
+          }).length != 0
+
+          if (hasSomeName) {
+            item.name = item.name + (new Date).getTime()
+          }
+
+          if (!exist) {
+            this.add(item, '', '', true).then(res => oldItems = res)
+          }
+        })
+      }).then((res) => resolve(res))
+
+    })
   }
 }
 
