@@ -9,7 +9,7 @@ Component({
     },
     content: {
       type: String,
-      value: '内容',
+      value: '',
     },
     theme: {
       type: String,
@@ -17,9 +17,17 @@ Component({
     },
     istextarea: {
       type: Boolean,
-      value: false
+      value: false,
     },
     placeholder: {
+      type: String,
+      value: '',
+    },
+    isimage: {
+      type: Boolean,
+      value: false,
+    },
+    src: {
       type: String,
       value: '',
     },
@@ -41,6 +49,7 @@ Component({
       this.setData({value: value })
       this.triggerEvent(`setvalue`, { value })
     },
+
     tap() {
       this.triggerEvent(`click`)
     }

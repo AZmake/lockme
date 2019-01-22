@@ -6,6 +6,7 @@
 
 .content {
   font-size: 32rpx;
+  line-height: 55rpx;
   word-break: break-all;
   padding: 20rpx;
   border-radius: 10rpx;
@@ -17,4 +18,9 @@
 
 .theme-black .content {
   background: #4D4C4D;
+}
+
+.image {
+  width: 200px;
+  height: 200px;
 }

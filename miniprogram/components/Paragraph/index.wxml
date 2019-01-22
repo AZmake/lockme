@@ -3,12 +3,18 @@
   <view class="flex title margin-bottom">
     {{title}}
   </view>
+
+  <view class="flex content main-center margin-bottom"
+    wx:if="{{isimage && src.length > 0}}">
+    <image class="flex image" src="{{src}}"></image>
+  </view>
+
   <rich-text class="flex content margin-bottom"
     wx:if="{{!istextarea && content.length > 0}}"
     nodes="{{content}}"
     space="{{space}}"></rich-text>
 
-  <textarea class="flex content"
+  <textarea class="flex content margin-bottom"
     wx:if="{{istextarea}}"
     value="{{value}}"
     bindinput="setValue"
