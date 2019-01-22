@@ -8,10 +8,12 @@
       wx:for="{{items}}"
       wx:key="{{index}}"
 
+      data-index="{{index}}"
+      bindtap="copyContent"
+
       theme="{{theme}}"
       title="{{item.title}}"
-      content="{{item.content}}"
-      data-index="{{index}}">
+      content="{{item.content}}">
     </paragraph>
   </view>
 </view>
