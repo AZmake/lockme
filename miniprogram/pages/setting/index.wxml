@@ -54,14 +54,14 @@
         <text class="iconfont icon-enter margin-right"></text>
       </view>
     </view>
-    <view class="flex line cross-center">
+    <!-- <view class="flex line cross-center">
       <view class="line-label">
         <text class="margin-left">私钥更改</text>
       </view>
       <view class="line-content">
         <text class="iconfont icon-enter margin-right"></text>
       </view>
-    </view>
+    </view> -->
   </view>
 
   <view class="flex wrap panel margin-top">
