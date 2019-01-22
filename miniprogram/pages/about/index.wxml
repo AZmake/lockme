@@ -1,34 +1,17 @@
 <view class="container flex theme-{{theme}}">
   <slot-message
-      class="flex" slot="header"
-      message="{{['关于我们']}}">
-    </slot-message>
+    class="flex" slot="header"
+    message="{{['关于我们']}}">
+  </slot-message>
   <view class="flex wrap main-center">
     <paragraph class="flex wrap"
-      theme="{{theme}}"
-      title="{{team.title}}"
-      content="{{team.content}}">
-    </paragraph>
+      wx:for="{{items}}"
+      wx:key="{{index}}"
 
-    <paragraph class="flex wrap"
       theme="{{theme}}"
-      title="{{github.title}}"
-      content="{{github.content}}"
-      bindtap="copy">
-    </paragraph>
-
-    <paragraph class="flex wrap"
-      theme="{{theme}}"
-      title="{{'微信公众号'}}"
-      isimage="{{true}}"
-      src="{{'/images/mp-wechat.png'}}">
-    </paragraph>
-
-    <paragraph class="flex wrap"
-      theme="{{theme}}"
-      title="{{'微信打赏'}}"
-      isimage="{{true}}"
-      src="{{'/images/wxpay.png'}}">
+      title="{{item.title}}"
+      content="{{item.content}}"
+      data-index="{{index}}">
     </paragraph>
   </view>
 </view>
