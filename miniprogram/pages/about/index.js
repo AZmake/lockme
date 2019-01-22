@@ -1,7 +1,4 @@
-import Base from '../../utils/Base'
-
 const app = getApp()
-const base = new Base
 
 Page({
   data: {

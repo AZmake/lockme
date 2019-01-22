@@ -120,7 +120,7 @@ Page({
   },
 
   goToFinishByGenerate() {
-    Safes.remove(app.setting.openid)
+    Safes.removeAll(app.setting.openid)
       .then(() => this.goFinishBefore())
   },
   /* 第四步相关 */
