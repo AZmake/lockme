@@ -1,0 +1,18 @@
+<view class="container flex theme-{{theme}}">
+  <slot-message
+    class="flex" slot="header"
+    message="{{['什么是公私钥']}}">
+  </slot-message>
+  <view class="flex wrap main-center">
+    <paragraph class="flex wrap"
+      wx:for="{{items}}"
+      wx:key="{{index}}"
+
+      data-index="{{index}}"
+
+      theme="{{theme}}"
+      title="{{item.title}}"
+      content="{{item.content}}">
+    </paragraph>
+  </view>
+</view>
