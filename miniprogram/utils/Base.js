@@ -50,7 +50,7 @@ export default class {
       return true
     }
 
-    wx.navigateTo({ url: '/pages/valid/index' })
+    wx.navigateTo({ url: `/pages/valid/index?validTime=${validTime}` })
 
     return false
   }

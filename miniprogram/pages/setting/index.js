@@ -37,13 +37,17 @@ Page({
   },
 
   exportSafes() {
-    Safes.exportData()
+    if(base._checkValidEndAt(Const.VALID_TIMES[1].value)) {
+      Safes.exportData()
+    }
   },
 
   importSafes() {
-    wx.navigateTo({
-      url: '/pages/import-safes/index'
-    })
+    if(base._checkValidEndAt(Const.VALID_TIMES[1].value)) {
+      wx.navigateTo({
+        url: '/pages/import-safes/index'
+      })
+    }
   },
 
   setValidTimesIndex() {

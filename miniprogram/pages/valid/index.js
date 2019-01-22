@@ -7,8 +7,13 @@ const base = new Base
 Page({
   data: {
     theme: '',
+    delay: 0,
     error: false,
     length: Const.FACEPASS_LENGTH,
+  },
+
+  onLoad(options) {
+    this.setData({ delay: parseInt(options.validTime) })
   },
 
   onShow() {
@@ -21,7 +26,7 @@ Page({
     const facepass = app.globalData.facepass
 
     if (value == facepass) {
-      const delay = app.setting.validTime
+      const delay = this.data.delay
       const validEndAt = (new Date).getTime() + delay
       wx.setStorageSync('validEndAt', validEndAt)
 

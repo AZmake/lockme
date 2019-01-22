@@ -197,7 +197,7 @@ Page({
   },
 
   goToCryptoIntro() {
-    wx.navigateTo({ url: '/pages/setting/index?from=init' })
+    wx.navigateTo({ url: '/pages/explain/index' })
   },
 
   goToIndex() {
