@@ -22,27 +22,23 @@ App({
     // 校验云端的公钥和本地是否一致
     PublicKeys.init().then(publicKey => {
       this.publicKey = publicKey
-      this.isInit()
     })
   },
 
   pageShow() {
+    // 更新主题
     this.changeTheme()
+
+    // 判断是否初始化
+    this.isInit()
   },
 
   isInit() {
-    const value = this.publicKey.value
     const crypto = this.globalData.crypto
     const facepass = this.globalData.facepass
-    
-    const routes =  getCurrentPages()
 
-    if (routes.length > 0 && routes[0].route != 'pages/init/index') {
-      // 验证是否配置
-      // 校验云端的公钥和本地是否一致
-      if ((!crypto || !facepass) || (!value && value != crypto.publicKey )) {
-        wx.redirectTo({ url: '/pages/init/index' })
-      }
+    if (!crypto || !facepass ) {
+      wx.redirectTo({ url: '/pages/init/index' })
     }
   },
 

@@ -30,7 +30,7 @@
 
   <!-- 密码列表 -->
   <safe-list class="flex"
-    wx:if="{{!form.show}}"
+    wx:if="{{!form.show || !isDiffPrivate}}"
 
     wx:for="{{safes}}"
     wx:key="{{index}}"
@@ -50,5 +50,12 @@
     theme="{{theme}}"
     wx:if="{{safes.length === 0 && !form.show}}"
     message="{{ keyword.length > 0 ? message.notFound : message.notData }}">
+  </safe-list-message>
+
+  <!-- 密码列表提示 -->
+  <safe-list-message class="flex"
+    theme="{{theme}}"
+    wx:if="{{isDiffPrivate}}"
+    message="{{ message.isDiffPrivate }}">
   </safe-list-message>
 </view>

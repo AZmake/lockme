@@ -14,9 +14,11 @@ Page({
     form: {
       show: false,
     },
+    isDiffPrivate: false,
     message: {
       notFound: '搜索不到数据',
       notData: '暂无数据，您可以进行创建',
+      isDiffPrivate: '私钥与公钥不匹配，请设置正确私钥'
     },
   },
 
@@ -25,7 +27,10 @@ Page({
   },
 
   onShow() {
-    this.setData({ theme: app.globalData.theme })
+    this.setData({
+      theme: app.globalData.theme,
+      isDiffPrivate: app.globalData.crypto.publicKey != app.publicKey.value
+    })
     app.pageShow()
   },
 
