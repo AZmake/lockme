@@ -22,6 +22,7 @@ export default class Setting extends Model {
 
   toJson() {
     return super.toJson({
+      openid: this.openid,
       validTime: parseInt(this.validTime),
       authentication: this.authentication,
       supportAuthentication: this.supportAuthentication,

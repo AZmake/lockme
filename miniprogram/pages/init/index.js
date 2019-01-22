@@ -1,7 +1,7 @@
 import Base from '../../utils/Base'
 import Const from '../../utils/Const'
 import Crypto from '../../utils/Crypto'
-import PublicKey from '../../models/PublicKey'
+import { Safes } from '../../collections/Safes'
 import { PublicKeys } from '../../collections/PublicKeys'
 
 const app = getApp()
@@ -120,7 +120,8 @@ Page({
   },
 
   goToFinishByGenerate() {
-    this.goFinishBefore()
+    Safes.remove(app.setting.openid)
+      .then(() => this.goFinishBefore())
   },
   /* 第四步相关 */
 
