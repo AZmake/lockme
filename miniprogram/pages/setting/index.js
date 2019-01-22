@@ -92,5 +92,11 @@ Page({
 
     // 更新数据
     this.setData({ validTime, validTimesIndex })
+  },
+
+  goAbout() {
+    wx.navigateTo({
+      url: '/pages/about/index'
+    })
   }
 })

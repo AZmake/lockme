@@ -76,7 +76,7 @@
         <text class="iconfont icon-enter margin-right"></text>
       </view>
     </view>
-    <view class="flex line cross-center">
+    <view class="flex line cross-center" bindtap="goAbout">
       <view class="line-label">
         <text class="margin-left">关于我们</text>
       </view>
