@@ -1,0 +1,26 @@
+<view class="container flex theme-{{theme}}">
+  <fixed-bottom class="flex full-height" margin="{{true}}">
+      <slot-message
+        class="flex" slot="header"
+        message="{{['设置私钥']}}">
+      </slot-message>
+
+      <view class="flex wrap main-center" slot="body">
+        <paragraph class="flex wrap"
+          theme="{{theme}}"
+          title="{{''}}"
+          content="{{data}}"
+          istextarea="{{true}}"
+          placeholder="{{'请输入私钥'}}"
+          bindsetvalue="setPrivateKey">
+        </paragraph>
+      </view>
+
+      <view class="flex" slot="footer">
+        <button class="my-button full margin-right"
+          bindtap="importPrivateKey">
+          <text>确认</text>
+        </button>
+      </view>
+  </fixed-bottom>
+</view>

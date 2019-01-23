@@ -6,7 +6,8 @@
     "pages/valid/index",
     "pages/import-safes/index",
     "pages/about/index",
-    "pages/explain/index"
+    "pages/explain/index",
+    "pages/set-private-key/index"
   ],
   "window": {
     "navigationBarTitleText": "LockMe",
