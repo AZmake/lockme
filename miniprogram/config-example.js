@@ -1,13 +1,16 @@
 export default {
   cloud: {
-    env: 'pushmetop',
+    env: '',
     collections: {
       safes: 'safes',
+      publicKeys: 'public_keys',
+      settings: 'settings',
     }
   },
-  themeName: 'black',
+  defaultTheme: 'black',
   themes: {
     black: {
+      name: 'black',
       navigationBar: {
         "frontColor": "#ffffff",
         "backgroundColor": "#353435"
@@ -30,6 +33,7 @@ export default {
       ]
     },
     white: {
+      name: 'white',
       navigationBar: {
         frontColor: "#000000",
         backgroundColor: "#ffffff",
