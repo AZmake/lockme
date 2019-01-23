@@ -3,6 +3,7 @@ import Const from '../../utils/Const'
 import Crypto from '../../utils/Crypto'
 import { Safes } from '../../collections/Safes'
 import { PublicKeys } from '../../collections/PublicKeys'
+import PublicKey from '../../models/PublicKey'
 
 const app = getApp()
 const base = new Base
@@ -16,7 +17,6 @@ Page({
     confirmFacepass: '',
     registered: false,
     error: false,
-    publicKey: {},
     crypto: {
       publicKey: '',
       privateKey: '',
@@ -34,17 +34,20 @@ Page({
 
   onLoad() {
     // 判断是否已经设置过私钥了
-    this.setData({
-      theme: app.globalData.theme,
-      publicKey: app.publicKey,
-      registered: !!app.publicKey.value,
-      crypto: { publicKey: app.publicKey.value, privateKey: '' },
+    PublicKeys.get().then(item => {
+      item ? this.setData({
+        registered: true,
+        crypto: { publicKey: item.value, privateKey: '' }
+      }) : this.setData({
+        registered: false,
+        crypto: { publicKey: '', privateKey: '' }
+      })
     })
 
+    this.setData({ theme: app.globalData.theme })
+
     // 验证是否已经设置过私钥
-    if (app.globalData.crypto
-      && app.globalData.facepass
-      && app.publicKey.value == app.globalData.crypto.publicKey) {
+    if (app.globalData.crypto && app.globalData.facepass) {
       this.goToIndex()
     }
   },
@@ -178,14 +181,15 @@ Page({
     // 初始化数据
     const crypto = this.data.crypto
     const facepass = this.data.facepass
-    let publicKey = app.publicKey 
 
     // 更新公钥
-    publicKey.value = crypto.publicKey
-    PublicKeys.edit(publicKey)
-    app.publicKey = publicKey
-
-
+    this.data.registered 
+      ? PublicKeys.get().then(item => {
+        item.value = crypto.publicKey
+        PublicKeys.edit(item)
+      })
+      : PublicKeys.add(new PublicKey({ value: crypto.publicKey }))
+    
     // 设置全局变量
     app.globalData.crypto = crypto
     app.globalData.facepass = facepass
