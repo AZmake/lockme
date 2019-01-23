@@ -6,16 +6,6 @@ class PublicKeyCollection extends Collection {
     super('publicKeys')
   }
 
-  init() {
-    return PublicKeys.get().then(item => {
-      return new Promise(resolve => {
-        item
-          ? resolve(item)
-          : this.add(new PublicKey).then(resolve)
-      })
-    })
-  }
-
   get() {
     return this.getToast().then(res => {
       this.items = res.data.map(i => new PublicKey(i))

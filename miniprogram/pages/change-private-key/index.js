@@ -2,7 +2,6 @@ import Base from '../../utils/Base'
 import Crypto from '../../utils/Crypto'
 import { Safes } from '../../collections/Safes'
 import { PublicKeys } from '../../collections/PublicKeys'
-import Safe from '../../models/Safe';
 
 
 const app = getApp()
@@ -11,6 +10,7 @@ const base = new Base
 Page({
   data: {
     theme: '',
+    publicKey: '',
     privateKey: '',
     isChange: false,
   },
@@ -18,6 +18,10 @@ Page({
   onLoad() {
     this.setData({
       crypto: Crypto.sm2.generateKeyPairHex()
+    })
+
+    PublicKeys.get().then(item => {
+      this.setData({ publicKey: item.value })
     })
   },
 
@@ -69,9 +73,12 @@ Page({
             })
 
             // 更新本地存储
+            app.globalData.crypto = crypto
             wx.setStorageSync('crypto', crypto)
-            this.setData({ isChange: true })
+
+            // 提示
             base._toast('私钥已更换成功')
+            this.setData({ isChange: true })
           }
         })
       })
@@ -79,7 +86,7 @@ Page({
   },
 
   checkPrivateKey() {
-    const publicKey = app.publicKey.value
+    const publicKey = this.data.publicKey
     const privateKey = this.data.privateKey
 
     if (privateKey == '') {

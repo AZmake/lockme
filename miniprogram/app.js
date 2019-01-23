@@ -1,6 +1,5 @@
 import Config from './utils/Config'
 import { Settings } from './collections/Settings'
-import { PublicKeys } from './collections/PublicKeys'
 
 App({
   onLaunch() {
@@ -15,13 +14,6 @@ App({
     // 判断是否有个人信息，诺无则进行创建
     Settings.init().then(setting => {
       this.setting = setting
-    })
-  },
-
-  onShow() {
-    // 校验云端的公钥和本地是否一致
-    PublicKeys.init().then(publicKey => {
-      this.publicKey = publicKey
     })
   },
 

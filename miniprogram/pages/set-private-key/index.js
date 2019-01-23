@@ -1,5 +1,6 @@
 import Base from '../../utils/Base'
 import Crypto from '../../utils/Crypto'
+import { PublicKeys } from '../../collections/PublicKeys'
 
 const app = getApp()
 const base = new Base
@@ -7,7 +8,14 @@ const base = new Base
 Page({
   data: {
     theme: '',
+    publicKey: '',
     privateKey: '',
+  },
+
+  onLoad() {
+    PublicKeys.get().then(item => {
+      this.setData({ publicKey: item.value })
+    })
   },
 
   onShow() {
@@ -20,7 +28,7 @@ Page({
   },
 
   importPrivateKey() {
-    const publicKey = app.publicKey.value
+    const publicKey = this.data.publicKey
     const privateKey = this.data.privateKey
 
     if (privateKey == '') {

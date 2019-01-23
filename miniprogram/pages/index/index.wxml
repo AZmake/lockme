@@ -30,7 +30,7 @@
 
   <!-- 密码列表 -->
   <safe-list class="flex"
-    wx:if="{{!form.show || !isDiffPrivate}}"
+    wx:if="{{!form.show && !isDiffPrivate}}"
 
     wx:for="{{safes}}"
     wx:key="{{index}}"

@@ -1,6 +1,7 @@
 import Safe from '../../models/Safe'
 import Base from '../../utils/Base'
 import { Safes } from '../../collections/Safes'
+import { PublicKeys } from '../../collections/PublicKeys'
 
 const app = getApp()
 const base = new Base
@@ -22,15 +23,10 @@ Page({
     },
   },
 
-  onLoad() { 
-    this.getSafes()
-  },
-
   onShow() {
-    this.setData({
-      theme: app.globalData.theme,
-      isDiffPrivate: app.globalData.crypto.publicKey != app.publicKey.value
-    })
+    this.setData({ theme: app.globalData.theme })
+    this.getSafes()
+    this.getPublicKey()
     app.pageShow()
   },
 
@@ -91,6 +87,16 @@ Page({
       .then(() => this.cancelForm())
   },
 
+  getPublicKey() {
+    const publicKey = app.globalData.crypto.publicKey
+
+    return PublicKeys.get().then(item => {
+      if (item) {
+        this.setData({ isDiffPrivate: publicKey != item.value })
+      }
+    })
+  },
+
   getSafes() {
     return Safes.get().then(safes => this.setData({ safes }))
   },
@@ -101,7 +107,6 @@ Page({
   },
 
   toggleSafe(e) {
-    console.log(app.setting)
     const safe = e.detail.safe
     if(base._checkValidEndAt(app.setting.validTime)) {
       Safes.toggle(safe).then(safes => this.setData({ safes }))
