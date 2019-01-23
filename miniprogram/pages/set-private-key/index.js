@@ -38,10 +38,11 @@ Page({
     base._loading('校验私钥和公钥是否匹配')
 
     const check = Crypto.sm2.getPublicKeyFromPrivateKey(privateKey)
-
+    const crypto =  { publicKey, privateKey }
     if(check == publicKey) {
       base._toast('导入成功')
-      wx.setStorageSync('crypto', { publicKey, privateKey })
+      app.globalData.crypto = crypto
+      wx.setStorageSync('crypto', crypto)
       setTimeout(() => wx.switchTab({ url: '/pages/setting/index' }), 2000)
     } else {
       base._toast('私钥和公钥不匹配\n请确认私钥是否正确')
