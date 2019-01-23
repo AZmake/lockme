@@ -153,7 +153,7 @@ Page({
       this.goFinishBefore()
     } else {
       this.setData({ error: true })
-      base._toast('私钥和公钥不匹配\n请确认私钥是否正确')
+      base._toast('私钥和公钥不匹配，请确认私钥是否正确')
       setTimeout(() => this.setData({ error: false }), 2000)
     }
   },

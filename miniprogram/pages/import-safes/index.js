@@ -8,7 +8,6 @@ Page({
   data: {
     safesJson: '',
     theme: '',
-    message: '导入数据',
   },
 
   onShow() {

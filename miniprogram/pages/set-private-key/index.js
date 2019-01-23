@@ -7,7 +7,6 @@ const base = new Base
 Page({
   data: {
     theme: '',
-    message: '导入数据',
     privateKey: '',
   },
 

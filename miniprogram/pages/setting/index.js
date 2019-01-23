@@ -102,5 +102,27 @@ Page({
     wx.navigateTo({
       url: '/pages/about/index'
     })
-  }
+  },
+
+  goExplain() {
+    wx.navigateTo({
+      url: '/pages/explain/index'
+    })
+  },
+
+  goSetPrivateKey() {
+    if(base._checkValidEndAt(Const.VALID_TIMES[1].value)) {
+      wx.navigateTo({
+        url: '/pages/set-private-key/index'
+      })
+    }
+  },
+
+  goChangePrivateKey() {
+    if(base._checkValidEndAt(Const.VALID_TIMES[1].value)) {
+      wx.navigateTo({
+        url: '/pages/change-private-key/index'
+      })
+    }
+  },
 })

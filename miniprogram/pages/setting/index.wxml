@@ -54,7 +54,7 @@
         <text class="iconfont icon-enter margin-right"></text>
       </view>
     </view>
-    <view class="flex line cross-center" bindtap="setPrivateKey">
+    <view class="flex line cross-center" bindtap="goSetPrivateKey">
       <view class="line-label">
         <text class="margin-left">设置私钥</text>
       </view>
@@ -62,7 +62,7 @@
         <text class="iconfont icon-enter margin-right"></text>
       </view>
     </view>
-    <view class="flex line cross-center">
+    <view class="flex line cross-center" bindtap="goChangePrivateKey">
       <view class="line-label">
         <text class="margin-left">更改私钥</text>
       </view>
@@ -76,7 +76,7 @@
     <view class="flex title cross-center">
       <text class="margin-left">其他</text>
     </view>
-    <view class="flex line cross-center">
+    <view class="flex line cross-center" bindtap="goExplain">
       <view class="line-label">
         <text class="margin-left">什么是公私钥</text>
       </view>
