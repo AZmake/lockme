@@ -24,12 +24,8 @@ Page({
     base._loading()
     Safes.importData(this.data.safesJson)
       .then(() => {
-        wx.showToast({
-          title: '导入成功',
-          icon: 'none',
-          duration: 2000,
-          success: () => wx.switchTab({ url: '/pages/index/index' })
-        })
+        base._toast('导入成功')
+        setTimeout(() => wx.switchTab({ url: '/pages/setting/index' }), 2000)
       })
       .catch((e) => base._toast(e.message))
   }
