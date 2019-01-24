@@ -118,7 +118,7 @@ class SafeCollection extends Collection {
           
           let exist = oldItems.filter(i => { 
             return i.password == item.password
-              && i.name == i.name
+              && i.name == item.name
           }).length != 0
 
           let hasSomeName = oldItems.filter(i => {
