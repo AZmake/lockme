@@ -24,6 +24,16 @@
 * `cloud.collection.settings` 设置集合
 * 其他配置请参考小程序官方文档 [传送门](https://developers.weixin.qq.com/miniprogram/dev/devtools/projectconfig.html)
 
+## 演示
+
+##### 初始化
+![初始化](https://raw.githubusercontent.com/pushmetop/resource/master/lockme/init.png)
+
+##### 密码中心
+![密码中心](https://raw.githubusercontent.com/pushmetop/resource/master/lockme/index.png)
+
+##### 设置
+![设置](https://raw.githubusercontent.com/pushmetop/resource/master/lockme/setting.png)
 
 ## 打赏&联系
 
