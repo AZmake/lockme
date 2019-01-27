@@ -2,21 +2,17 @@
 
 项目的所有变化都将记录在这个文档。
 
-该日志标准基于 [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
-该项目版本号标准基于 [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
+该日志标准基于 [Keep a Changelog](https://keepachangelog.com/en/1.0.0/)，
+该项目版本号标准基于 [Semantic Versioning](https://semver.org/spec/v2.0.0.html)。
 
 ## 未发布
 ### 增加了
 
-- 密码中心 添加 标签功能
+- 密码中心 添加 标签功能。
 
 ## 0.1.0 - 2019-01-27
 ### 增加了
 
-- 初始化 添加 简单密码、创建新私钥、导入旧私钥
-- 密码中心 添加 密码创建、密码删除、密码修改、密码搜索、密码复制
-- 设置 添加 皮肤设置、锁定时间、备份数据、导入数据、设置私钥、更改私钥、什么是公私钥、关于我们
-
-
-[未发布]: https://github.com/pushmetop/lockme/compare/v1.0.0...HEAD
-[0.1.0]: https://github.com/pushmetop/lockme/compare/v0.1.0...v0.0.0
+- 初始化 添加 简单密码、创建新私钥、导入旧私钥。
+- 密码中心 添加 密码创建、密码删除、密码修改、密码搜索、密码复制。
+- 设置 添加 皮肤设置、锁定时间、备份数据、导入数据、设置私钥、更改私钥、什么是公私钥、关于我们。
