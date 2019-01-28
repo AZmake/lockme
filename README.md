@@ -85,7 +85,7 @@
 
 ![lockme](https://raw.githubusercontent.com/pushmetop/resource/master/pushmetop.github.io/lockme/lockme-unsearch.png)
 
-嘻嘻，所以 `LockMe` 是一款有大厂交互的工具，小二编了吹了这么久 🐂 ，小哥哥小姐姐你还不试试嘛？还不赶紧给小二点个 `Star`？
+嘻嘻，所以 `LockMe` 是一款有大厂交互的工具，小二吹了这么久，小哥哥小姐姐你还不试试嘛？还不赶紧给小二点个 `Star`？
 
 ## 打赏&联系
 
