@@ -3,6 +3,7 @@
 ##### LockMe 是什么呢？
 
 * 一款免费开源的密码管理小程序。
+* 源码地址 [https://github.com/pushmetop/lockme](https://github.com/pushmetop/lockme) 。
 
 ##### 市面上有许许多多的密码管理工具，为何要特意造轮子呢？
 
@@ -44,15 +45,15 @@
 ## 演示
 
 ##### 初始化
-![初始化](https://raw.githubusercontent.com/pushmetop/resource/master/lockme/init.png)
+![初始化](https://raw.githubusercontent.com/pushmetop/resource/master/pushmetop.github.io/lockme/init.png)
 
 ##### 密码中心
-![密码中心](https://raw.githubusercontent.com/pushmetop/resource/master/lockme/index.png)
+![密码中心](https://raw.githubusercontent.com/pushmetop/resource/master/pushmetop.github.io/lockme/index.png)
 
 ##### 设置
-![设置](https://raw.githubusercontent.com/pushmetop/resource/master/lockme/setting.png)
+![设置](https://raw.githubusercontent.com/pushmetop/resource/master/pushmetop.github.io/lockme/setting.png)
 
-## 设计理念（虾扯蛋）
+## 设计理念
 
 基于大家日常生活中最常使用的网站 `百度` 的交互进行设计，更方便和直觉的让用户使用 `LockMe`。
 
@@ -84,7 +85,7 @@
 
 ![lockme](https://raw.githubusercontent.com/pushmetop/resource/master/pushmetop.github.io/lockme/lockme-unsearch.png)
 
-嘻嘻，所以 `LockMe` 是一款有大厂交互的工具，小哥哥小姐姐你还不试试嘛？
+嘻嘻，所以 `LockMe` 是一款有大厂交互的工具，小二编了吹了这么久 🐂 ，小哥哥小姐姐你还不试试嘛？还不赶紧给小二点个 `Star`？
 
 ## 打赏&联系
 
