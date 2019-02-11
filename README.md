@@ -44,6 +44,9 @@
 
 ## 演示
 
+##### 小程序二维码
+![初始化](https://raw.githubusercontent.com/pushmetop/resource/master/pushmetop.github.io/lockme/qrcode.png)
+
 ##### 初始化
 ![初始化](https://raw.githubusercontent.com/pushmetop/resource/master/pushmetop.github.io/lockme/init.png)
 
@@ -58,7 +61,6 @@
 基于大家日常生活中最常使用的网站 `百度` 的交互进行设计，更方便和直觉的让用户使用 `LockMe`。
 
 先回想一下平时使用百度时的三个基本状态：
-
 不进行任何搜索操作时：
 
 ![baidu](https://raw.githubusercontent.com/pushmetop/resource/master/pushmetop.github.io/lockme/baidu-base.png)
@@ -93,4 +95,4 @@
 
 ![打赏&联系](https://raw.githubusercontent.com/pushmetop/resource/master/donate/donate.png)
 
-> 本文原稿来自 [PushMetop](https://pushmetop.github.io)
+> 本文原稿来自 [PushMeTop](https://pushmetop.github.io)
